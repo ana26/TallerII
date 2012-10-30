@@ -76,20 +76,13 @@ public class Ventana_inicio extends JFrame{
                     if ( txt_contra.getText().length() > 0) {
                         if(validarUsuario(txt_usuario.getText(),txt_contra.getText())) {
                             setVisible(false);
-                          //if(IdentificarPuesto(txt_usuario.getText(), emp1)){
+                    
                              JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
                               Menu_Principal f = new Menu_Principal();
                               f.setVisible(true);
 
 
-
-                   // }
-                         // else{
-                             //VentanaCaja v = new VentanaCaja();
-                            //v.setVisible(true);
-//JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
-                          //}
-
+             
                         }
                         else {
                             JOptionPane.showMessageDialog(null, "El usuario y/o contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -124,7 +117,8 @@ public class Ventana_inicio extends JFrame{
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/comovamos?user=root,password=123456");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+       
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"';");
             if (resultado.first()){
@@ -142,35 +136,5 @@ public class Ventana_inicio extends JFrame{
             return false;
         }
     }
-
-/*private boolean IdentificarPuesto(String usuario, String emp1){
-    try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:4001/cfe?user=root");
-            Statement instruccion = conn.createStatement();
-            ResultSet resultado = instruccion.executeQuery("select * from empleado where IDEmp = '"+usuario+"' and puesto ='"+emp1+"';");
-       if (resultado.first()){
-          if(resultado.getString("IDEmp").equals(usuario)) {
-             if (resultado.getString("puesto").equals(emp1)){
-
-               return true;
-                }
-
-             else {
-
-               return false;
-             }
-        }
-                }
-            return false;
-     }
-        catch(Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, e.toString());
-            return false;
-        }
-
-    }*/
-
-
-
+   
 }

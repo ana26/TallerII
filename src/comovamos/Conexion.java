@@ -34,12 +34,12 @@ public class Conexion {
 
     public Conexion(String usuario, String contraseña) throws SQLException, ClassNotFoundException
     {
-        //System.out.println(usuario);
+        
         try{
             this.Usuario1=usuario;
             this.Contraseña1=contraseña;
             Class.forName("com.mysql.jdbc.Driver");
-            String url="jdbc:mysql://localhost/comovamos";
+            String url="jdbc:mysql://148.226.81.254:3306/comovamos";
             conecta=DriverManager.getConnection(url,Usuario1,Contraseña1);
             sentencia=conecta.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
         } catch(ClassCastException ex){
