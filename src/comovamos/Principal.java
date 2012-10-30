@@ -1,3 +1,5 @@
+package comovamos;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;

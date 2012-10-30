@@ -1,3 +1,5 @@
+package comovamos;
+
 import java.awt.image.BufferedImage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
