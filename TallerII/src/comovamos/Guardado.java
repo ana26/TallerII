@@ -42,31 +42,61 @@ public class Guardado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jRadioButton1.setText("PDF");
-        jRadioButton1.setName("jRadioButton1"); // NOI18N
+        jRadioButton1.setName("Pdf"); // NOI18N
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setText("Imagen chica");
         jRadioButton2.setEnabled(false);
         jRadioButton2.setName("jRadioButton2"); // NOI18N
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton3.setText("Imagen Mediana");
         jRadioButton3.setEnabled(false);
         jRadioButton3.setName("jRadioButton3"); // NOI18N
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         jRadioButton4.setText("Imagen grande");
         jRadioButton4.setEnabled(false);
         jRadioButton4.setName("jRadioButton4"); // NOI18N
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Elija el formato de salida, ya sea un pdf o una imagen en jpg o png según desee así como el tamaño de la imagen.");
         jLabel1.setName("jLabel1"); // NOI18N
 
         jButton1.setText("Exportar");
-        jButton1.setName("jButton1"); // NOI18N
+        jButton1.setName("Exportar"); // NOI18N
 
         jRadioButton8.setText("Imagen JPG");
-        jRadioButton8.setName("jRadioButton8"); // NOI18N
+        jRadioButton8.setName("Jpg"); // NOI18N
+        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8ActionPerformed(evt);
+            }
+        });
 
         jRadioButton9.setText("Imagen PNG");
-        jRadioButton9.setName("jRadioButton9"); // NOI18N
+        jRadioButton9.setName("Png"); // NOI18N
+        jRadioButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,6 +152,51 @@ public class Guardado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton8.setSelected(false);
+    this.jRadioButton9.setSelected(false);
+    this.jRadioButton2.setEnabled(false);
+    this.jRadioButton3.setEnabled(false);
+    this.jRadioButton4.setEnabled(false);
+}//GEN-LAST:event_jRadioButton1ActionPerformed
+
+private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton1.setSelected(false);
+    this.jRadioButton9.setSelected(false);
+    this.jRadioButton2.setEnabled(true);
+    this.jRadioButton3.setEnabled(true);
+    this.jRadioButton4.setEnabled(true);
+}//GEN-LAST:event_jRadioButton8ActionPerformed
+
+private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton1.setSelected(false);
+    this.jRadioButton8.setSelected(false);
+    this.jRadioButton2.setEnabled(true);
+    this.jRadioButton3.setEnabled(true);
+    this.jRadioButton4.setEnabled(true);
+}//GEN-LAST:event_jRadioButton9ActionPerformed
+
+private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton3.setSelected(false);
+    this.jRadioButton4.setSelected(false);
+}//GEN-LAST:event_jRadioButton2ActionPerformed
+
+private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton2.setSelected(false);
+    this.jRadioButton4.setSelected(false);
+}//GEN-LAST:event_jRadioButton3ActionPerformed
+
+private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+// TODO add your handling code here:
+    this.jRadioButton3.setSelected(false);
+    this.jRadioButton2.setSelected(false);
+}//GEN-LAST:event_jRadioButton4ActionPerformed
 
     /**
      * @param args the command line arguments

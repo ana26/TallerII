@@ -88,8 +88,11 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="PDF"/>
-        <Property name="name" type="java.lang.String" value="jRadioButton1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="Pdf" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton2">
       <Properties>
@@ -97,6 +100,9 @@
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="jRadioButton2" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton3">
       <Properties>
@@ -104,6 +110,9 @@
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="jRadioButton3" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton3ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton4">
       <Properties>
@@ -111,6 +120,9 @@
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="jRadioButton4" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton4ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -121,20 +133,26 @@
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exportar"/>
-        <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="Exportar" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Imagen JPG"/>
-        <Property name="name" type="java.lang.String" value="jRadioButton8" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="Jpg" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton8ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton9">
       <Properties>
         <Property name="text" type="java.lang.String" value="Imagen PNG"/>
-        <Property name="name" type="java.lang.String" value="jRadioButton9" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="Png" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton9ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
