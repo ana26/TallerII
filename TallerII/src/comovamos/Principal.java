@@ -204,58 +204,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
-    String dato=JOptionPane.showInputDialog("En que formato desea el archivo: \n1)pdf\n2)jpg\n3)png");
-    while((!dato.equals("1"))&&(!dato.equals("2"))&&(!dato.equals("3"))){
-        dato=JOptionPane.showInputDialog("Error de elección, elija algo válido: \n1)pdf\n2)jpg\n3)png");
-    }
-    String alto="";
-    String ancho="";
-    String tamaño;
-    if((dato.equals("2"))||(dato.equals("3"))){
-        tamaño=JOptionPane.showInputDialog("Eliga tamaño de gráfico:\n1)pequeño\n2)mediano\n3)grande");
-        while((!tamaño.equals("1"))&&(!tamaño.equals("2"))&&(!tamaño.equals("3"))){
-            tamaño=JOptionPane.showInputDialog("Error de elección, elija algo válido:\n1)pequeño\n2)mediano\n3)grande");
-        }        
-    }else{
-        tamaño="4";
-    }
-    if((tamaño.equals("1"))){
-        alto="480";
-        ancho="640";
-    }
-    else{
-        if(tamaño.equals("2")){
-            alto="600";
-            ancho="800";
-        }
-        else{
-            if(tamaño.equals("3")){
-                alto="768";
-                ancho="1024";
-            }
-            else{
-                if(tamaño.equals("4")){
-                alto="320";
-                ancho="500";
-                }
-            }
-        }
-    }
-    JFileChooser explorador = new JFileChooser("C:\\");
-    explorador.setDialogTitle("Guardar gráfica...");
-    int seleccion = explorador.showDialog(null, "Guardar");
-    switch(seleccion) {
-        case JFileChooser.APPROVE_OPTION:    
-            grafica.exportargrafico(explorador.getSelectedFile().toString(), Integer.parseInt(alto), Integer.parseInt(ancho), dato);
-        break;
-        case JFileChooser.CANCEL_OPTION:
-            //dio click en cancelar o cerro la ventana
-        break;
-        case JFileChooser.ERROR_OPTION:
-            //llega aqui si sucede un error
-        break;
-    }    
+    Guardado guardar=new Guardado();
+    guardar.Graficas(grafica);
+    guardar.setVisible(true);
+    this.jPanel1.setVisible(false);
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -297,7 +249,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
