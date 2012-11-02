@@ -258,8 +258,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             //llega aqui si sucede un error
         break;
     }    
-    }
-    
+    } 
     
 }//GEN-LAST:event_jButton1ActionPerformed
     public static void main(String args[]) {
