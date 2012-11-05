@@ -10,11 +10,21 @@
  */
 package comovamos;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lalo
  */
 public class Regiones extends javax.swing.JInternalFrame {
+    DefaultTableModel tabla1= new DefaultTableModel ();
+    private String codigopl;
+    public static String sql;
+       public static Connection con;
+    public static PreparedStatement ps;
+ public static ResultSet rs;
+ public static ResultSet rs2;
+}
 
     /** Creates new form Regiones */
     public Regiones() {
