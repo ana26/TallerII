@@ -89,6 +89,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Catalogos");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Usuarios");
         jMenu1.add(jMenuItem1);
@@ -109,6 +114,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem5);
 
         jMenuItem6.setText("Entidades");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         SubMenuIndicador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
@@ -187,6 +197,19 @@ public class Menu_Principal extends javax.swing.JFrame {
          h2.setVisible(true);
          h2.setSize(new Dimension(1275, 700));
     }//GEN-LAST:event_SubMenuEncuestaActionPerformed
+
+private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+   encuesta h4 = new encuesta();
+         mainPanel.add(h4);
+         h4.setVisible(true);
+         h4.setSize(new Dimension(1275, 700));
+    
+    // TODO add your handling code here:
+}//GEN-LAST:event_jMenuItem6ActionPerformed
+
+private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jMenu1ActionPerformed
      /**
     * @param args the command line arguments
     */
