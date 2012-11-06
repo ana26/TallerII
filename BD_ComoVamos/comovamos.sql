@@ -106,6 +106,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `com_indicador`;
 
 CREATE TABLE `com_indicador` (
+  `IND_flag` tinyint(1) DEFAULT '0',
   `IND_id` int(11) NOT NULL AUTO_INCREMENT,
   `IND_Nombre` varchar(45) NOT NULL,
   `IND_Formula` varchar(100) DEFAULT NULL,
@@ -143,6 +144,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `com_plantilla`;
 
 CREATE TABLE `com_plantilla` (
+  `PLA_flag` tinyint(1) DEFAULT '0',
   `PLA_id` int(11) NOT NULL AUTO_INCREMENT,
   `PLA_NomPlantilla` varchar(100) NOT NULL,
   `PLA_Descripcion` varchar(300) DEFAULT NULL,

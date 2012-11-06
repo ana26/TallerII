@@ -16,6 +16,7 @@ public class Indicador{
         public static ResultSet rs;
         public static ResultSet rs2;
 
+        private static boolean IND_flag;
         private static int IND_id;
         private static String IND_Nombre;
         private static String IND_Formula;
@@ -23,13 +24,15 @@ public class Indicador{
         private static int IND_Padre;
     public Indicador(){
         cn = null;
+        IND_flag = false;
         IND_id = 1;
         IND_Nombre = "";
         IND_Formula = "";
         IND_Color = "";
         IND_Padre = 1;
     }
-    public Indicador(int IND_id, String IND_Nombre, String IND_indicadorcol, String IND_Formula, String IND_Color, int IND_Padre){
+    public Indicador(boolean IND_flag, int IND_id, String IND_Nombre, String IND_indicadorcol, String IND_Formula, String IND_Color, int IND_Padre){
+        this.IND_flag = IND_flag;
         this.IND_id = IND_id;
         this.IND_Nombre = IND_Nombre;
         this.IND_Formula = IND_Formula;
@@ -38,6 +41,9 @@ public class Indicador{
         this.cn = cn;
     }
     /*****GET*****/
+    public static boolean getIND_flag(){
+        return IND_flag;
+    }
     public static int getIND_id(){
         return IND_id;
     }
@@ -54,6 +60,10 @@ public class Indicador{
         return IND_Padre;
     }
     /*****SET*****/
+
+    public static void setIND_flag(boolean IND_flag){
+        Indicador.IND_flag = IND_flag;
+    }
     public static void setIND_id(int IND_id){
         Indicador.IND_id = IND_id;
     }
@@ -78,7 +88,7 @@ public class Indicador{
         return otro.equals(otro.ToString());
     }
     public String ToString(){
-        return "IND_id: "+IND_id+", IND_Nombre: "+IND_Nombre+", IND_Formula: "+IND_Formula+", IND_Color: "+IND_Color+", IND_Padre: "+IND_Padre;
+        return "IND_flag: "+IND_flag+", IND_id: "+IND_id+", IND_Nombre: "+IND_Nombre+", IND_Formula: "+IND_Formula+", IND_Color: "+IND_Color+", IND_Padre: "+IND_Padre;
     }
    public static void cargarDriver(){
         try{
@@ -101,13 +111,14 @@ public class Indicador{
     }
     public static void RegistrarIndicador(){
         try{
-            sql = "INSERT INTO COM_Indicador VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO COM_Indicador VALUES (?,?,?,?,?,?)";
             ps = Indicador.cn.prepareStatement(sql);
-            ps.setString(1, null);
-            ps.setString(2, IND_Nombre);
-	    ps.setString(3, IND_Formula);
-            ps.setString(4, IND_Color);
-            ps.setInt(5, IND_Padre);
+            ps.setBoolean(1, false);
+            ps.setString(2, null);
+            ps.setString(3, IND_Nombre);
+	    ps.setString(4, IND_Formula);
+            ps.setString(5, IND_Color);
+            ps.setInt(6, IND_Padre);
             ps.executeUpdate();
         }
         catch(SQLException e){
@@ -135,10 +146,10 @@ public class Indicador{
             ps = Indicador.cn.prepareStatement(sql);
             rs = ps.executeQuery();
             if(rs.next()){
-                IND_id = rs.getInt(1);
-                IND_Nombre = rs.getString(2);
-                IND_Formula = rs.getString(3);
-                IND_Color = rs.getString(4);
+                IND_id = rs.getInt(2);
+                IND_Nombre = rs.getString(3);
+                IND_Formula = rs.getString(4);
+                IND_Color = rs.getString(5);
                 IND_Padre = rs.getInt(5);
                 return true;
             }
@@ -150,13 +161,14 @@ public class Indicador{
             return false;
         }
     }
+    
     public static boolean EliminaIndicador(String cod){
         try{
-            sql = "DELETE FROM COM_Indicador WHERE IND_id = ?";
+            sql = "DELETE FROM COM_Indicador WHERE IND_id = "+cod;
             ps = Indicador.cn.prepareStatement(sql);
-            ps.setString(1, cod);
+           
             int nro = ps.executeUpdate();
-            if(nro > 0)
+            if(nro >= 0)
                 return true;
             else
                 return false;
@@ -176,13 +188,14 @@ public class Indicador{
             ps=Indicador.cn.prepareStatement(sql);
             rs2=ps.executeQuery("SELECT COUNT(*) FROM COM_Indicador ");
             rs2.next();
-            Object[][] tabla= new Object[rs2.getInt(1)][5];
+            Object[][] tabla= new Object[rs2.getInt(1)][6];
             for (int i = 0;rs.next(); i++){
-                tabla[i][0]=rs.getInt(1);
+                tabla[i][0]=rs.getBoolean(1);
                 tabla[i][1]=rs.getString(2);
                 tabla[i][2]=rs.getString(3);
 		tabla[i][3]=rs.getString(4);
-                tabla[i][4]=rs.getInt(5);
+                tabla[i][4]=rs.getString(5);
+                tabla[i][5]=rs.getInt(6);
             }
             return tabla;
         }
@@ -190,5 +203,19 @@ public class Indicador{
             JOptionPane.showMessageDialog(null,"Error en SQL "+e.getMessage());
             return null;
         }
+    }
+   public boolean update(String valores, String id)
+    {
+        boolean res = false;
+        String q = " UPDATE COM_Indicador SET " + valores + " WHERE IND_id = " + id;
+        try {
+            PreparedStatement pstm = cn.prepareStatement(q);
+            pstm.execute();
+            pstm.close();
+            res=true;
+         }catch(SQLException e){
+            System.out.println(e);
+        }
+        return res;
     }
 }

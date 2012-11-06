@@ -8,6 +8,7 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /*
  * Parte Elaborada por Oscar
  * Correspondiente a la Entidad (Catalogos) COM_Indicador
@@ -15,32 +16,62 @@ import javax.swing.table.TableModel;
  * ~NO~ Borrar
  */
 public class frmIndicador extends javax.swing.JInternalFrame {
- java.util.Date fecha = new java.util.Date();
+ private database db = new database();
+    private Object[][] dtPersona;
+    boolean IND_flag = false;
+    java.util.Date fecha = new java.util.Date();
+    //Para Llenar la Tabla ~> Tabla Indicadores
     DefaultTableModel modelo = new DefaultTableModel();
+    //Para Agregar Items al ComboBox desde la BD
     Connection cnn;
     String sqli = null;
     PreparedStatement psi;
     ResultSet rsi;
-    int filas;
-    int IND_id= 0, IND_Padre= 0;
+    //Variables Globales
+    int filas,IND_id= 0, IND_Padre= 0;
     String IND_Nombre = "",IND_indicadorcol = "",IND_Formula = "",IND_Color = "", codigo  = "";
-    String nombreColumnas[]={"IND_id","IND_Nombre","IND_Formula","IND_Color","IND_PadreNombre"};
     boolean reg, autoreg,salidareg;
-    String codmod;
-    int MAXIMIZED_BOTH;
-
+    String codmod;    
+    //Llenar Encabezado de Campo de la Tabla
+    String nombreColumnas[]={"IND_flag","IND_id","IND_Nombre","IND_Formula","IND_Color","IND_PadreNombre"};
+    
     /** Creates new form frmIndicador */
     public frmIndicador() {
         initComponents();
         Cargar();
     }
+    
 void Cargar(){
         String Usuario ="ozkar";
         String Pass ="";
         Indicador.cargarDriver();
         Indicador.conexionBaseDatos(Usuario, Pass);
-        modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+         modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+         TablaPer();
     }
+void TablaPer(){
+        TablaIndicadores.getColumnModel().getColumn( 0 ).setCellEditor(new MyTableCellEditor(db,"IND_flag"));//Columna Apellido
+        TablaIndicadores.getColumnModel().getColumn( 2 ).setCellEditor(new MyTableCellEditor(db,"IND_Nombre"));//Columna Apellido
+        TablaIndicadores.getColumnModel().getColumn( 3 ).setCellEditor(new MyTableCellEditor(db,"IND_Formula"));//Columna Edad
+        TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEditor(db,"IND_Color"));//Columna Edad
+        TablaIndicadores.getColumnModel().getColumn( 5 ).setCellEditor(new MyTableCellEditor(db,"IND_Padre"));//Columna Edad
+        //Agregar CheckBox
+        TablaIndicadores.getColumnModel().getColumn( 0 ).setCellEditor( new Celda_CheckBox() );
+        TablaIndicadores.getColumnModel().getColumn( 0 ).setCellRenderer(new Render_CheckBox());
+         //Tamaño fijo para el jCheckBox Columna 0 ***IND_id***
+        TablaIndicadores.getColumnModel().getColumn(0).setMaxWidth(25);
+        TablaIndicadores.getColumnModel().getColumn(0).setMinWidth(25);
+        TablaIndicadores.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(25);
+        TablaIndicadores.getTableHeader().getColumnModel().getColumn(0).setMinWidth(25);
+        //Ocultar ***IND_id*** Llave Primaria Columna 1 ~> 0
+        TablaIndicadores.getColumnModel().getColumn(1).setMaxWidth(50);
+        TablaIndicadores.getColumnModel().getColumn(1).setMinWidth(50);
+        TablaIndicadores.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(50);
+        TablaIndicadores.getTableHeader().getColumnModel().getColumn(1).setMinWidth(50);
+        //Ordenar columnas en el JTable = TablaIndicadores
+        TableRowSorter<TableModel> CampoEncabezado = new TableRowSorter<TableModel> (modelo);
+        TablaIndicadores.setRowSorter(CampoEncabezado);
+}
     void LimpiarTxts(){
             Txtid.setText("");
             TxtNombre.setText("");
@@ -58,18 +89,84 @@ void Cargar(){
         ComboNomIndi.setEnabled(true);
     }
     void AgregarItemsIndicador(){
+        int total = modelo.getRowCount()+1;
+        ComboNomIndi.removeAllItems();
+        String matris[][];
+        Connection cn;
+        String sql;
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSet rs2;
+        try{
+            sql = "SELECT * FROM COM_Indicador ";
+            ps = Indicador.cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            sql="SELECT COUNT(*) FROM COM_Indicador ";
+            ps=Indicador.cn.prepareStatement(sql);
+            rs2=ps.executeQuery("SELECT COUNT(*) FROM COM_Indicador ");
+            rs2.next();
+            Object[][] tabla= new Object[rs2.getInt(1)][6];
+            for (int i = 0;rs.next(); i++){
+                tabla[i][0]=rs.getBoolean(1);
+                tabla[i][1]=rs.getString(2);
+                tabla[i][2]=rs.getString(3);
+		tabla[i][3]=rs.getString(4);
+                tabla[i][4]=rs.getString(5);
+                tabla[i][5]=rs.getInt(6);
+                ComboNomIndi.addItem(""+rs.getBoolean(1)+",  "+rs.getObject(3));
+            }
+            
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Error en SQL "+e.getMessage());
+            
+        }
+
+    }
+
+/*
         try{
             sqli = "SELECT * FROM COM_Indicador ";
             psi = Indicador.cn.prepareStatement(sqli);
             rsi = psi.executeQuery();
             while(rsi.next()){
-                ComboNomIndi.addItem(rsi.getObject(2));
+
+                        ComboNomIndi.addItem(rsi.getObject(3));
             }
          }
         catch(SQLException e){
              JOptionPane.showMessageDialog(null,"Error en SQL "+e.getMessage());
         }
-}
+        
+        JComboBox comboBox2 =new JComboBox();
+        try {
+            rsi = Indicador.ps.executeQuery("SELECT * FROM COM_Indicador ");
+            while(rsi.next()){
+                comboBox2.enable(true);
+                comboBox2.addItem(rsi.getObject(3));
+            }
+        } catch (SQLException ex){
+            Logger.getLogger(frmIndicador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TablaIndicadores.setCellEditor(new DefaultCellEditor(comboBox2)); //enfasis en esta linea!!!!
+        DefaultCellEditor defaultCellEditor=new DefaultCellEditor(comboBox2);
+        TablaIndicadores.getColumnModel().getColumn(4).setCellEditor(defaultCellEditor);
+TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEditor(db,"IND_Color"));//Columna Edad
+    }*/
+    private Integer PosicionMarcado(DefaultTableModel lmodelo, int columna){
+   try{
+       for(int fila = 0; fila <= lmodelo.getRowCount() ; fila++){
+           if(lmodelo.getValueAt(fila,columna).equals(true)){
+             JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado:::   " +fila);
+             return fila;
+           }
+       }
+   }catch(Exception ex){
+      JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
+   }
+   return -1;
+ }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,6 +193,8 @@ void Cargar(){
         TxtColor = new javax.swing.JTextField();
         TxtIndiPadre = new javax.swing.JTextField();
         ComboNomIndi = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        TablaEditable = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -151,6 +250,7 @@ void Cargar(){
         ToolIndicador.add(BuscarIndicador);
 
         TablaIndicadores.setModel(modelo);
+        TablaIndicadores.setIntercellSpacing(new java.awt.Dimension(3, 3));
         ScrollIndicador.setViewportView(TablaIndicadores);
 
         jLabel1.setText("Indicador Llave");
@@ -267,148 +367,64 @@ void Cargar(){
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        TablaEditable.setText("Editable");
+        TablaEditable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TablaEditableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TablaEditable, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(11, 11, 11)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addComponent(PanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(400, 400, 400))
+            .addComponent(ToolIndicador, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ScrollIndicador, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(395, 395, 395)
-                .addComponent(PanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(400, Short.MAX_VALUE))
-            .addComponent(ToolIndicador, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(ToolIndicador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ToolIndicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollIndicador, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton1)
+                        .addGap(55, 55, 55)
+                        .addComponent(TablaEditable)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void NuevoIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoIndicadorActionPerformed
-        LimpiarTxts();
-        reg = true;
-        rsi = null;
-        ComboNomIndi.removeAllItems();
-        try {
-            rsi = Indicador.ps.executeQuery("SELECT * FROM COM_Indicador ");
-            while(rsi.next()){
-                ComboNomIndi.addItem(rsi.getObject(2));
-            }
-        } catch (SQLException ex){
-            Logger.getLogger(frmIndicador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Habilitar();
-        AgregarItemsIndicador();
-        Txtid.setEnabled(false);
-        TxtNombre.requestFocus();
-}//GEN-LAST:event_NuevoIndicadorActionPerformed
-
-    private void ModificarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarIndicadorActionPerformed
-        LimpiarTxts();
-        AgregarItemsIndicador();
-        Habilitar();
-        codmod=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar: ");
-        if(Indicador.BuscarIndicador(codmod)) {
-            Txtid.setText(String.valueOf(Indicador.getIND_id()));
-            TxtNombre.setText(Indicador.getIND_Nombre());
-            TxtFormula.setText(Indicador.getIND_Formula());
-            TxtColor.setText(Indicador.getIND_Color());
-            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
-            reg = false;
-        } else{
-            JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
-            reg = true;
-        }
-}//GEN-LAST:event_ModificarIndicadorActionPerformed
-
-    private void AgregarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarIndicadorActionPerformed
-        if(!TxtFormula.getText().equals("") && !TxtNombre.getText().equals("") && !TxtColor.getText().equals("") && !TxtIndiPadre.getText().equals("")) {
-            //IND_Nombre = TxtNombre.getText();
-            IND_Nombre = (String) ComboNomIndi.getSelectedItem();
-            JOptionPane.showMessageDialog(null,"Campo "+ IND_Nombre);
-            IND_Formula = TxtFormula.getText();
-            IND_Color = TxtColor.getText();
-            IND_Padre = Integer.parseInt(TxtIndiPadre.getText());
-            Indicador al = new Indicador(IND_id,IND_Nombre,IND_indicadorcol,IND_Formula,IND_Color,IND_Padre);
-            if(reg) {
-                Indicador.RegistrarIndicador();
-                JOptionPane.showMessageDialog(null,"Indicador Registrado");
-                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
-            } else {                
-                Indicador.ModificarIndicador(codmod);
-                JOptionPane.showMessageDialog(null,"Indicador Modificado");
-                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
-            }
-        } else    JOptionPane.showMessageDialog(null,"Campos Vacios, Favor de Llenar Datos Correspondientes");
-}//GEN-LAST:event_AgregarIndicadorActionPerformed
-
-    private void EliminarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarIndicadorActionPerformed
-        codigo=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar:  ");
-        if(Indicador.BuscarIndicador(codigo)) {
-            Txtid.setText(String.valueOf(Indicador.getIND_id()));
-            TxtNombre.setText(Indicador.getIND_Nombre());
-            TxtFormula.setText(Indicador.getIND_Formula());
-            TxtColor.setText(Indicador.getIND_Color());
-            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
-            int resp= JOptionPane.showConfirmDialog(this,"Esta Seguro de Eliminar Regitro ","Eliminar Dato",JOptionPane.YES_NO_OPTION );
-            if( resp == JOptionPane.YES_OPTION ){
-                Indicador.EliminaIndicador(codigo);
-                JOptionPane.showMessageDialog(this,"Registro Eliminado");
-                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
-            }
-            LimpiarTxts();
-        } else JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
-}//GEN-LAST:event_EliminarIndicadorActionPerformed
-
-    private void BuscarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarIndicadorActionPerformed
-        codigo=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar:  ");
-        Indicador.BuscarIndicador(codigo);
-        if(Indicador.BuscarIndicador(codigo)) {
-            Txtid.setText(String.valueOf(Indicador.getIND_id()));
-            TxtNombre.setText(Indicador.getIND_Nombre());
-            TxtFormula.setText(Indicador.getIND_Formula());
-            TxtColor.setText(Indicador.getIND_Color());
-            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
-        } else{
-            JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
-            LimpiarTxts();
-            modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
-        }
-        Indicador.Reportar(); 
-
-        JCheckBox comboBox = new JCheckBox();
-        JComboBox comboBox2 =new JComboBox();
-
-        try {
-            rsi = Indicador.ps.executeQuery("SELECT * FROM COM_Indicador ");
-            while(rsi.next()){
-                comboBox.setSelected(true);
-                comboBox2.addItem(rsi.getObject(3));
-            }
-        } catch (SQLException ex){
-            Logger.getLogger(frmIndicador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        TablaIndicadores.setCellEditor(new DefaultCellEditor(comboBox2)); //enfasis en esta linea!!!!
-        DefaultCellEditor defaultCellEditor=new DefaultCellEditor(comboBox2);
-        TablaIndicadores.getColumnModel().getColumn(3).setCellEditor(defaultCellEditor);
-        AgregarItemsIndicador();
-}//GEN-LAST:event_BuscarIndicadorActionPerformed
 
     private void TxtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtidActionPerformed
         // TODO add your handling code here:
@@ -429,6 +445,156 @@ void Cargar(){
         char car = evt.getKeyChar();
         if((car<'0' || car>'9')) evt.consume();
 }//GEN-LAST:event_TxtIndiPadreKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int fila = 0;
+        String id_IND;
+        try{
+            while (fila <= modelo.getRowCount()+1){
+                if(modelo.getValueAt(fila,0).equals(true)){
+                    Txtid.setText(modelo.getValueAt(fila,1).toString());
+                    TxtNombre.setText(modelo.getValueAt(fila,2).toString());
+                    TxtFormula.setText(modelo.getValueAt(fila,3).toString());
+                    TxtColor.setText(modelo.getValueAt(fila,4).toString());
+                    TxtIndiPadre.setText(modelo.getValueAt(fila,5).toString());
+                    codigo = modelo.getValueAt(fila,1).toString();
+                        if(Indicador.BuscarIndicador(codigo)) {
+                           int resp= JOptionPane.showConfirmDialog(this,"Esta Seguro de Eliminar Regitro ","Eliminar Dato",JOptionPane.YES_NO_OPTION );
+                               if( resp == JOptionPane.YES_OPTION ){
+                                    Indicador.EliminaIndicador(codigo);
+                                    modelo.removeRow(fila);
+                                    fila = -1;
+                                    JOptionPane.showMessageDialog(this,"Registro Eliminado");
+                                }
+                           
+                           } else {JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");}                  
+                    
+                }
+                fila++;
+            }
+        }
+        catch(Exception ex){}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TablaEditableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TablaEditableActionPerformed
+        // TODO add your handling code here:
+        AgregarItemsIndicador();
+    }//GEN-LAST:event_TablaEditableActionPerformed
+
+    private void BuscarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarIndicadorActionPerformed
+        Cargar();
+        codigo=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar:  ");
+        Indicador.BuscarIndicador(codigo);
+        if(Indicador.BuscarIndicador(codigo)) {
+            Txtid.setText(String.valueOf(Indicador.getIND_id()));
+            TxtNombre.setText(Indicador.getIND_Nombre());
+            TxtFormula.setText(Indicador.getIND_Formula());
+            TxtColor.setText(Indicador.getIND_Color());
+            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
+        } else{
+            JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
+            LimpiarTxts();
+            modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+            TablaPer();
+        }
+        Indicador.Reportar();
+
+        JCheckBox comboBox = new JCheckBox();
+        JComboBox comboBox2 =new JComboBox();
+
+        try {
+            rsi = Indicador.ps.executeQuery("SELECT * FROM COM_Indicador ");
+            while(rsi.next()){
+                comboBox2.enable(true);
+                comboBox2.addItem(rsi.getObject(3));
+            }
+        } catch (SQLException ex){
+            Logger.getLogger(frmIndicador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        TablaIndicadores.setCellEditor(new DefaultCellEditor(comboBox2)); //enfasis en esta linea!!!!
+        DefaultCellEditor defaultCellEditor=new DefaultCellEditor(comboBox2);
+        TablaIndicadores.getColumnModel().getColumn(5).setCellEditor(defaultCellEditor);
+        AgregarItemsIndicador();
+}//GEN-LAST:event_BuscarIndicadorActionPerformed
+
+    private void EliminarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarIndicadorActionPerformed
+        codigo=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar:  ");
+        if(Indicador.BuscarIndicador(codigo)) {
+            Txtid.setText(String.valueOf(Indicador.getIND_id()));
+            TxtNombre.setText(Indicador.getIND_Nombre());
+            TxtFormula.setText(Indicador.getIND_Formula());
+            TxtColor.setText(Indicador.getIND_Color());
+            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
+            int resp= JOptionPane.showConfirmDialog(this,"Esta Seguro de Eliminar Regitro ","Eliminar Dato",JOptionPane.YES_NO_OPTION );
+            if( resp == JOptionPane.YES_OPTION ){
+                Indicador.EliminaIndicador(codigo);
+                JOptionPane.showMessageDialog(this,"Registro Eliminado");
+                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+            }
+            LimpiarTxts();
+        } else JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
+    }//GEN-LAST:event_EliminarIndicadorActionPerformed
+
+    private void AgregarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarIndicadorActionPerformed
+
+        if(!TxtFormula.getText().equals("") && !TxtNombre.getText().equals("") && !TxtColor.getText().equals("") && !TxtIndiPadre.getText().equals("")) {
+            //IND_Nombre = TxtNombre.getText();
+            IND_Nombre = (String) ComboNomIndi.getSelectedItem();
+            JOptionPane.showMessageDialog(null,"Campo "+ IND_Nombre);
+            IND_Formula = TxtFormula.getText();
+            IND_Color = TxtColor.getText();
+            IND_Padre = Integer.parseInt(TxtIndiPadre.getText());
+            Indicador al = new Indicador(IND_flag,IND_id,IND_Nombre,IND_indicadorcol,IND_Formula,IND_Color,IND_Padre);
+            if(reg) {
+                Indicador.RegistrarIndicador();
+                JOptionPane.showMessageDialog(null,"Indicador Registrado");
+                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+            } else {
+                Indicador.ModificarIndicador(codmod);
+                JOptionPane.showMessageDialog(null,"Indicador Modificado");
+                modelo.setDataVector(Indicador.Reportar(), nombreColumnas);
+            }
+        } else    JOptionPane.showMessageDialog(null,"Campos Vacios, Favor de Llenar Datos Correspondientes");
+}//GEN-LAST:event_AgregarIndicadorActionPerformed
+
+    private void ModificarIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarIndicadorActionPerformed
+        LimpiarTxts();
+        AgregarItemsIndicador();
+        Habilitar();
+        codmod=JOptionPane.showInputDialog("Ingrese el código del Indicador a Buscar: ");
+        if(Indicador.BuscarIndicador(codmod)) {
+            Txtid.setText(String.valueOf(Indicador.getIND_id()));
+            TxtNombre.setText(Indicador.getIND_Nombre());
+            TxtFormula.setText(Indicador.getIND_Formula());
+            TxtColor.setText(Indicador.getIND_Color());
+            TxtIndiPadre.setText(String.valueOf(Indicador.getIND_Padre()));
+            reg = false;
+        } else{
+            JOptionPane.showMessageDialog(null,"El Código del Indicador No fue encontrado");
+            reg = true;
+        }
+}//GEN-LAST:event_ModificarIndicadorActionPerformed
+
+    private void NuevoIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoIndicadorActionPerformed
+        LimpiarTxts();
+        reg = true;
+        rsi = null;
+        ComboNomIndi.removeAllItems();
+        try {
+            rsi = Indicador.ps.executeQuery("SELECT * FROM COM_Indicador ");
+            while(rsi.next()){
+                ComboNomIndi.addItem(rsi.getObject(3));
+            }
+        } catch (SQLException ex){
+            Logger.getLogger(frmIndicador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Habilitar();
+        AgregarItemsIndicador();
+        Txtid.setEnabled(false);
+        TxtNombre.requestFocus();
+}//GEN-LAST:event_NuevoIndicadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarIndicador;
     private javax.swing.JButton BuscarIndicador;
@@ -438,6 +604,7 @@ void Cargar(){
     private javax.swing.JButton NuevoIndicador;
     private javax.swing.JPanel PanelLabel;
     private javax.swing.JScrollPane ScrollIndicador;
+    private javax.swing.JButton TablaEditable;
     private javax.swing.JTable TablaIndicadores;
     private javax.swing.JToolBar ToolIndicador;
     private javax.swing.JTextField TxtColor;
@@ -445,6 +612,7 @@ void Cargar(){
     private javax.swing.JTextField TxtIndiPadre;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField Txtid;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
