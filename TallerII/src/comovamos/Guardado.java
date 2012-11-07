@@ -79,6 +79,15 @@ public class Guardado extends javax.swing.JFrame {
                 jRadioButton8ActionPerformed(evt);
             }
         });
+        jRadioButton8.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jRadioButton8AncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jRadioButton9.setText("Imagen PNG");
         jRadioButton9.setName("Png"); // NOI18N
@@ -152,23 +161,51 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     this.jRadioButton2.setEnabled(false);
     this.jRadioButton3.setEnabled(false);
     this.jRadioButton4.setEnabled(false);
+    this.jRadioButton2.setSelected(false);
+    this.jRadioButton3.setSelected(false);
+    this.jRadioButton4.setSelected(false);
+    
 }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+    int dato=1;
+    if(dato==1){
     this.jRadioButton1.setSelected(false);
     this.jRadioButton9.setSelected(false);
     this.jRadioButton2.setEnabled(true);
     this.jRadioButton3.setEnabled(true);
     this.jRadioButton4.setEnabled(true);
+    dato=2;
+    }else{
+        System.out.println("holap");
+        this.jRadioButton2.setEnabled(false);
+        this.jRadioButton3.setEnabled(false);
+        this.jRadioButton4.setEnabled(false);
+        this.jRadioButton2.setSelected(false);
+        this.jRadioButton3.setSelected(false);
+        this.jRadioButton4.setSelected(false);
+        dato=1;
+    }
 }//GEN-LAST:event_jRadioButton8ActionPerformed
 
 private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
-
+    int dato=1;
+    if(dato==1){
     this.jRadioButton1.setSelected(false);
     this.jRadioButton8.setSelected(false);
     this.jRadioButton2.setEnabled(true);
     this.jRadioButton3.setEnabled(true);
     this.jRadioButton4.setEnabled(true);
+    dato=2;
+    }else{
+        this.jRadioButton2.setEnabled(false);
+        this.jRadioButton3.setEnabled(false);
+        this.jRadioButton4.setEnabled(false);
+        this.jRadioButton2.setSelected(false);
+        this.jRadioButton3.setSelected(false);
+        this.jRadioButton4.setSelected(false);
+        dato=1;
+    }
 }//GEN-LAST:event_jRadioButton9ActionPerformed
 
 private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -261,6 +298,11 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     } 
     
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void jRadioButton8AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jRadioButton8AncestorMoved
+// TODO add your handling code here:
+    
+}//GEN-LAST:event_jRadioButton8AncestorMoved
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
