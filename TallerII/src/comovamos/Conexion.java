@@ -3,6 +3,8 @@ package comovamos;
 
 import java.sql.*;
 import javax.swing.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexion {
 
@@ -12,6 +14,8 @@ public class Conexion {
     PreparedStatement psPreparasentencia;
     String Usuario1;
     String Contraseña1;
+    Statement stm;
+    PreparedStatement pstm;
 
     public String getContraseña1() {
         return Contraseña1;
@@ -67,5 +71,30 @@ public void ejecutar(String sql)throws SQLException
         throw ex;
     }
 }
+ /**Permite retornar la conexión*/
+   public Connection getConnection(){
+      return conecta;
+   }
+
+   //permite cerrar la conexion
+   public void desconectar(){
+      conecta = null;
+   }
+   
+   //permite hacer consultas de solo lectura recibe la conección, los campos que se quieren ver o * para todos,
+   //las tablas de las cuales se van a obtener resultados, y las condiciones si es que hay si no pasa vacía
+   //ejemplo con.select(conecta,"*","tabla1,tabla2","where tabla1.id=tabla2.id")
+  public ResultSet select(Conexion con,String campos,String tablas,String condicion){
+      ResultSet res=null; 
+      try {
+            stm=con.getConnection().createStatement();
+            pstm=con.getConnection().prepareStatement("select "+campos+" from "+tablas+" "+condicion);
+            res=pstm.executeQuery();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
+  }
 
 }
