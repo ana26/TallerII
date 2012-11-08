@@ -15,6 +15,8 @@ public class Guardado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Grupo1 = new javax.swing.ButtonGroup();
+        Grupo2 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -23,9 +25,11 @@ public class Guardado extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jRadioButton8 = new javax.swing.JRadioButton();
         jRadioButton9 = new javax.swing.JRadioButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        Grupo1.add(jRadioButton1);
         jRadioButton1.setText("PDF");
         jRadioButton1.setName("Pdf"); // NOI18N
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -34,6 +38,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
+        Grupo2.add(jRadioButton2);
         jRadioButton2.setText("Imagen chica");
         jRadioButton2.setEnabled(false);
         jRadioButton2.setName("jRadioButton2"); // NOI18N
@@ -43,6 +48,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
+        Grupo2.add(jRadioButton3);
         jRadioButton3.setText("Imagen Mediana");
         jRadioButton3.setEnabled(false);
         jRadioButton3.setName("jRadioButton3"); // NOI18N
@@ -52,6 +58,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
+        Grupo2.add(jRadioButton4);
         jRadioButton4.setText("Imagen grande");
         jRadioButton4.setEnabled(false);
         jRadioButton4.setName("jRadioButton4"); // NOI18N
@@ -72,6 +79,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
+        Grupo1.add(jRadioButton8);
         jRadioButton8.setText("Imagen JPG");
         jRadioButton8.setName("Jpg"); // NOI18N
         jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +97,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
+        Grupo1.add(jRadioButton9);
         jRadioButton9.setText("Imagen PNG");
         jRadioButton9.setName("Png"); // NOI18N
         jRadioButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +105,8 @@ public class Guardado extends javax.swing.JFrame {
                 jRadioButton9ActionPerformed(evt);
             }
         });
+
+        jLayeredPane1.setName("jLayeredPane1"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,10 +128,12 @@ public class Guardado extends javax.swing.JFrame {
                                     .addComponent(jRadioButton4)
                                     .addComponent(jRadioButton2)))
                             .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton9))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jRadioButton9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(495, Short.MAX_VALUE)
+                .addContainerGap(557, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -145,7 +158,10 @@ public class Guardado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton4)))
+                        .addComponent(jRadioButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -156,71 +172,37 @@ public void Graficas(CGBarras grafica){
  this.grafica=grafica;   
 }
 private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-    this.jRadioButton8.setSelected(false);
-    this.jRadioButton9.setSelected(false);
+    this.jRadioButton2.setSelected(false);
+    this.jRadioButton3.setSelected(false);
+    this.jRadioButton4.setSelected(false);
     this.jRadioButton2.setEnabled(false);
     this.jRadioButton3.setEnabled(false);
     this.jRadioButton4.setEnabled(false);
-    this.jRadioButton2.setSelected(false);
-    this.jRadioButton3.setSelected(false);
-    this.jRadioButton4.setSelected(false);
-    
 }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
-    int dato=1;
-    if(dato==1){
-    this.jRadioButton1.setSelected(false);
-    this.jRadioButton9.setSelected(false);
     this.jRadioButton2.setEnabled(true);
     this.jRadioButton3.setEnabled(true);
     this.jRadioButton4.setEnabled(true);
-    dato=2;
-    }else{
-        System.out.println("holap");
-        this.jRadioButton2.setEnabled(false);
-        this.jRadioButton3.setEnabled(false);
-        this.jRadioButton4.setEnabled(false);
-        this.jRadioButton2.setSelected(false);
-        this.jRadioButton3.setSelected(false);
-        this.jRadioButton4.setSelected(false);
-        dato=1;
-    }
+    
 }//GEN-LAST:event_jRadioButton8ActionPerformed
 
 private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
-    int dato=1;
-    if(dato==1){
-    this.jRadioButton1.setSelected(false);
-    this.jRadioButton8.setSelected(false);
     this.jRadioButton2.setEnabled(true);
     this.jRadioButton3.setEnabled(true);
     this.jRadioButton4.setEnabled(true);
-    dato=2;
-    }else{
-        this.jRadioButton2.setEnabled(false);
-        this.jRadioButton3.setEnabled(false);
-        this.jRadioButton4.setEnabled(false);
-        this.jRadioButton2.setSelected(false);
-        this.jRadioButton3.setSelected(false);
-        this.jRadioButton4.setSelected(false);
-        dato=1;
-    }
 }//GEN-LAST:event_jRadioButton9ActionPerformed
 
 private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-    this.jRadioButton3.setSelected(false);
-    this.jRadioButton4.setSelected(false);
+    
 }//GEN-LAST:event_jRadioButton2ActionPerformed
 
 private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-    this.jRadioButton2.setSelected(false);
-    this.jRadioButton4.setSelected(false);
+    
 }//GEN-LAST:event_jRadioButton3ActionPerformed
 
 private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-    this.jRadioButton3.setSelected(false);
-    this.jRadioButton2.setSelected(false);
+    
 }//GEN-LAST:event_jRadioButton4ActionPerformed
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -332,8 +314,11 @@ private void jRadioButton8AncestorMoved(javax.swing.event.AncestorEvent evt) {//
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup Grupo1;
+    private javax.swing.ButtonGroup Grupo2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
