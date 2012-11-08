@@ -207,6 +207,11 @@ public class Ventana_inicio extends javax.swing.JFrame {
 
 
 
+
+
+
+
+
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
             ActionListener eAceptar = new ActionListener() {
             @Override
@@ -250,11 +255,15 @@ public class Ventana_inicio extends javax.swing.JFrame {
 }//GEN-LAST:event_txt_usuarioActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RecContr().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
