@@ -6,11 +6,20 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-
+import javax.swing.JOptionPane;
 
 /*
- * Parte de filtrado de datos para la ventana de gráfica, los datos de esta parte modificaran la vista de la gráfica
- * falta juntar ambas ventanas
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+ * Fdatos.java
+ *
+ * Created on 09-nov-2012, 14:15:14
+ */
+/**
+ *
  * @author chocobo
  */
 public class Fdatos extends javax.swing.JFrame {
@@ -35,6 +44,14 @@ public class Fdatos extends javax.swing.JFrame {
         lencuestas = new javax.swing.JComboBox();
         lindicadores = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Filtrado de datos");
@@ -45,6 +62,7 @@ public class Fdatos extends javax.swing.JFrame {
         });
 
         lregion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lregion.setToolTipText("Seleccione una region, para ver la info de todas las regiones selccione la opcion en blanco y de clic al boton de aplicar"); // NOI18N
         lregion.setName("lregion"); // NOI18N
         lregion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +71,7 @@ public class Fdatos extends javax.swing.JFrame {
         });
 
         lentidades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lentidades.setToolTipText("Seleccione una entidad, deje en blanco para ver la info de todas las entidades de la región seleccionada");
         lentidades.setName("lentidades"); // NOI18N
 
         lencuestas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -70,34 +89,118 @@ public class Fdatos extends javax.swing.JFrame {
         jToolBar1.setAutoscrolls(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Home\\Documents\\NetBeansProjects\\TI2\\src\\resources\\Aceptar.png")); // NOI18N
+        jButton1.setToolTipText("Aplicar");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
+
+        jInternalFrame1.setMaximizable(true);
+        jInternalFrame1.setTitle("Gráfica de Barras");
+        jInternalFrame1.setMaximumSize(new java.awt.Dimension(600, 800));
+        jInternalFrame1.setMinimumSize(new java.awt.Dimension(300, 400));
+        jInternalFrame1.setName("jInternalFrame1"); // NOI18N
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1118, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 499, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Region:");
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        jLabel2.setText("Entidad:");
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        jLabel3.setText("Encuesta:");
+        jLabel3.setName("jLabel3"); // NOI18N
+
+        jLabel4.setText("Indicador:");
+        jLabel4.setName("jLabel4"); // NOI18N
+
+        jDateChooser1.setName("jDateChooser1"); // NOI18N
+
+        jLabel5.setText("Periodo:");
+        jLabel5.setName("jLabel5"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(607, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1336, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(248, 248, 248))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
+
+        try {
+            jInternalFrame1.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,16 +208,14 @@ public class Fdatos extends javax.swing.JFrame {
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 // TODO add your handling code here:
     limpiar();
-    lentidades.setToolTipText("Seleccione una entidad");
-    lindicadores.setToolTipText("Seleccione un indicador");
-    lregion.setToolTipText("Seleccione una región");
-    lencuestas.setToolTipText("Seleccione una encuesta");
-        try {
+    try {
+            //tabla.setEnabled(false);
             con=new Conexion("tallerii1202","paul123");
+            
         } catch (SQLException ex) {
-            System.out.println("No se pudo conectar");
+            JOptionPane.showMessageDialog(null, "No se pudo acceder al servidor de la Base de Datos, verifique que tiene conexion con acceso al servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     llenarlregion();
     //llenarlentidades();        llenarlindicadores();
@@ -132,6 +233,33 @@ private void lencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 // TODO add your handling code here:
     if(lencuestas.getSelectedIndex()>0){lindicadores.enable();llenarlindicadores();}
 }//GEN-LAST:event_lencuestasActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+    //código boton 1
+    //programar para cuando alguna de las listas tengo 0
+    String a,b,c,d,campos,tablas;
+    tablas="com_region JOIN com_entidad JOIN com_plantilla JOIN com_indicador";
+    campos="com_region.REG_nombreregion AS region,com_entidad.DZN_NombreEntidad AS Entidad,com_entidad.DZN_descripcion AS descripcion_entidad,com_plantilla.PLA_NomPlantilla AS Encuesta,com_plantilla.PLA_Descripcion AS descripcion_encuesta,com_plantilla.PLA_Periodo AS Perido,com_indicador.IND_Nombre AS Indicador";
+    if(lregion.getSelectedIndex()<1){p1=new VDatos(campos,tablas,"WHERE com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id");p1.show();}
+    if(lregion.getSelectedIndex()>0){a=lregion.getSelectedItem().toString();
+        if(lentidades.getSelectedIndex()<1){/*De la region selccionada mostrar todas las entidades*/p1=new VDatos(campos,tablas,"WHERE com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");p1.show();}
+        if(lentidades.getSelectedIndex()>0){b=lentidades.getSelectedItem().toString();
+            if(lencuestas.getSelectedIndex()<1){/*de la entidad seleccionada mostrar todas las encuestas e indicadores*/}
+            if(lencuestas.getSelectedIndex()>0){c=lencuestas.getSelectedItem().toString();
+                if(lindicadores.getSelectedIndex()<1){/*Mostrar de la encuesta seleccionada todos los indicadores*/}
+                if(lindicadores.getSelectedIndex()>0){d=lindicadores.getSelectedItem().toString();
+                    //String campos, String tablas, String condicion
+                    p1=new VDatos(campos,tablas,"where com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id and com_region.REG_nombreRegion='"+a+"' and com_entidad.DZN_NombreEntidad='"+b+"' and com_plantilla.PLA_NomPlantilla='"+c+"' and com_indicador.IND_Nombre='"+d+"'");
+                    p1.show();
+                }
+            }
+        }
+    
+    }
+    
+    VDatos ver=new VDatos("*","com_region JOIN com_entidad JOIN com_plantilla JOIN com_indicador","where ");
+}//GEN-LAST:event_jButton1ActionPerformed
 public void limpiar(){
     lregion.removeAllItems();
     lentidades.removeAllItems();
@@ -243,8 +371,19 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
             }
         });
     }
+
    
+        
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JComboBox lencuestas;
     private javax.swing.JComboBox lentidades;
@@ -255,6 +394,7 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
     ResultSet rs4,rs1,rs2,rs3;
     int l=0,m=0;
     boolean bindicadores=false;
+    VDatos p1;
     String dregiones[],dentidades[],dencuestas[],dindicadores[];
     
 }
