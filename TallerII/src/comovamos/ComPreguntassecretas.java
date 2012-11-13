@@ -1,4 +1,4 @@
-
+/*
 package comovamos;
 
 import java.io.Serializable;
@@ -106,3 +106,5 @@ public class ComPreguntassecretas implements Serializable {
     }
     
 }
+
+ */

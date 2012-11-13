@@ -1,5 +1,5 @@
 package comovamos;
-
+/*
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -166,3 +166,4 @@ public class ComUsuarios implements Serializable {
     }
     
 }
+*/
