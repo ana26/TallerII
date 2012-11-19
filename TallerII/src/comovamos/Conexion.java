@@ -8,14 +8,14 @@ import java.util.logging.Logger;
 
 public class Conexion {
 
-    Connection conecta;
-    Statement sentencia;
-    ResultSet rsDatos;
-    PreparedStatement psPreparasentencia;
-    String Usuario1;
-    String Contraseña1;
-    Statement stm;
-    PreparedStatement pstm;
+    private Connection conecta;
+    private Statement sentencia;
+    private ResultSet rsDatos;
+    private PreparedStatement psPreparasentencia;
+    private String Usuario1;
+    private String Contraseña1;
+    private Statement stm;
+    private PreparedStatement pstm;
 
     public String getContraseña1() {
         return Contraseña1;
@@ -44,8 +44,8 @@ public class Conexion {
             this.Contraseña1=contraseña;
             Class.forName("com.mysql.jdbc.Driver");
             String url="jdbc:mysql://148.226.81.254:3306/comovamos";
-            conecta=DriverManager.getConnection(url,Usuario1,Contraseña1);
-            sentencia=conecta.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            this.conecta=DriverManager.getConnection(url,this.Usuario1,this.Contraseña1);
+            this.sentencia=this.conecta.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
         } catch(ClassCastException ex){
             throw ex;
         }catch(SQLException ex1){
@@ -57,28 +57,28 @@ public class Conexion {
 public ResultSet consulta(String sql) throws SQLException
 {
     try{
-        rsDatos=sentencia.executeQuery(sql);
+        this.rsDatos=this.sentencia.executeQuery(sql);
           }catch (SQLException ex){
               throw ex;
           }
-    return rsDatos;
+    return this.rsDatos;
 }
 public void ejecutar(String sql)throws SQLException
 {
     try{
-        sentencia.execute(sql);
+        this.sentencia.execute(sql);
     } catch (SQLException ex){
         throw ex;
     }
 }
  /**Permite retornar la conexión*/
    public Connection getConnection(){
-      return conecta;
+      return this.conecta;
    }
 
    //permite cerrar la conexion
    public void desconectar(){
-      conecta = null;
+      this.conecta = null;
    }
    
    //permite hacer consultas de solo lectura recibe la conección, los campos que se quieren ver o * para todos,
@@ -87,9 +87,9 @@ public void ejecutar(String sql)throws SQLException
   public ResultSet select(Conexion con,String campos,String tablas,String condicion){
       ResultSet res=null; 
       try {
-            stm=con.getConnection().createStatement();
-            pstm=con.getConnection().prepareStatement("select "+campos+" from "+tablas+" "+condicion);
-            res=pstm.executeQuery();
+            this.stm=con.getConnection().createStatement();
+            this.pstm=con.getConnection().prepareStatement("select "+campos+" from "+tablas+" "+condicion);
+            res=this.pstm.executeQuery();
         }
         catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
