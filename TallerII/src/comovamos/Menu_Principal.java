@@ -57,6 +57,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         SubMenuIndicador = new javax.swing.JMenuItem();
         SubMenuDetalleEncuesta = new javax.swing.JMenuItem();
+        Gráficas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -138,6 +139,10 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(SubMenuDetalleEncuesta);
+
+        Gráficas.setText("Gráficas");
+        jMenu1.add(Gráficas);
+        Gráficas.getAccessibleContext().setAccessibleName("Gáficas");
 
         jMenuBar1.add(jMenu1);
 
@@ -222,6 +227,7 @@ private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Gráficas;
     private javax.swing.JMenuItem SubMenuDetalleEncuesta;
     private javax.swing.JMenuItem SubMenuEncuesta;
     private javax.swing.JMenuItem SubMenuIndicador;
