@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Filtrado de datos"/>
   </Properties>
   <SyntheticProperties>
@@ -209,8 +209,8 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Home\Documents\NetBeansProjects\TI2\src\resources\Aceptar.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/comovamos/Iconos/Guardar.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Aplicar"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -252,7 +252,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="552" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="553" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
