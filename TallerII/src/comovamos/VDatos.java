@@ -120,6 +120,7 @@ String campos, tablas, condicion;
         public void ctabla(){
          modelo = new DefaultTableModel();
         tabla.setModel(modelo);
+        //tabla.setEnabled(false);
         try {
             //tabla.setEnabled(false);
             con=new Conexion("tallerii1202","paul123");
@@ -135,7 +136,8 @@ String campos, tablas, condicion;
                 
       
         try {//obtenemos los nombres de las columnas y armamos la tabla
-         tdatos=new String[res.getMetaData().getColumnCount()];
+         if(res.next()){res.first();
+             tdatos=new String[res.getMetaData().getColumnCount()];
          while(n<(res.getMetaData().getColumnCount()+1)){   
             modelo.addColumn(res.getMetaData().getColumnLabel(n));
             
@@ -144,7 +146,9 @@ String campos, tablas, condicion;
          for(int f=1;f<n;f++) {
             tdatos[p]=res.getMetaData().getColumnTypeName(f);
             p++;
-        }	
+        }
+         }
+        if(!res.next()){JOptionPane.showMessageDialog(null, "No se encontraron resultados que cumplan las condiciones seleccionadas\nPruebe establecer otro periodo ", "Sín resultados", JOptionPane.INFORMATION_MESSAGE);}
                   	
                  
         } catch (SQLException ex) {
@@ -162,7 +166,7 @@ String campos, tablas, condicion;
                         System.out.println(""+tdatos[i]);
                         if(tdatos[i]=="INT"){datos[i]=String.valueOf(res.getInt(i+1));}
                         if(tdatos[i]=="VARCHAR"){datos[i]=res.getString(i+1);}
-                        if(tdatos[i]=="DATETIME"){datos[i]=""+res.getDate(i+1).getDay()+"/"+res.getDate(i+1).getMonth()+"/"+(res.getDate(i+1).getYear()+1900);}
+                        if(tdatos[i]=="DATETIME"){datos[i]=res.getDate(i+1).toString();}
                         
                     }
                     modelo.addRow(datos);

@@ -1,17 +1,14 @@
 package comovamos;
 
 
+import com.toedter.calendar.JDateChooser;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+//import org.jdesktop.application.Action;
 
 /*
  * Fdatos.java
@@ -20,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author chocobo
+ * @author Carlos Benjamín Chablé Mínkez
  */
 public class Fdatos extends javax.swing.JFrame {
 
@@ -45,12 +42,17 @@ public class Fdatos extends javax.swing.JFrame {
         lindicadores = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        JFgrafica = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        finicio = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        ffin = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Filtrado de datos");
@@ -72,6 +74,11 @@ public class Fdatos extends javax.swing.JFrame {
         lentidades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         lentidades.setToolTipText("Seleccione una entidad, deje en blanco para ver la info de todas las entidades de la región seleccionada");
         lentidades.setName("lentidades"); // NOI18N
+        lentidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lentidadesActionPerformed(evt);
+            }
+        });
 
         lencuestas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         lencuestas.setName("lencuestas"); // NOI18N
@@ -84,10 +91,12 @@ public class Fdatos extends javax.swing.JFrame {
         lindicadores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         lindicadores.setName("lindicadores"); // NOI18N
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
         jToolBar1.setAutoscrolls(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Home\\Documents\\NetBeansProjects\\TI2\\src\\resources\\Aceptar.png")); // NOI18N
         jButton1.setToolTipText("Aplicar");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -100,22 +109,22 @@ public class Fdatos extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
-        jInternalFrame1.setMaximizable(true);
-        jInternalFrame1.setTitle("Gráfica de Barras");
-        jInternalFrame1.setMaximumSize(new java.awt.Dimension(600, 800));
-        jInternalFrame1.setMinimumSize(new java.awt.Dimension(300, 400));
-        jInternalFrame1.setName("jInternalFrame1"); // NOI18N
-        jInternalFrame1.setVisible(true);
+        JFgrafica.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 0)));
+        JFgrafica.setTitle("Gráfica de Barras");
+        JFgrafica.setMaximumSize(new java.awt.Dimension(600, 800));
+        JFgrafica.setMinimumSize(new java.awt.Dimension(300, 400));
+        JFgrafica.setName("jfgrafica"); // NOI18N
+        JFgrafica.setVisible(true);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1118, Short.MAX_VALUE)
+        javax.swing.GroupLayout JFgraficaLayout = new javax.swing.GroupLayout(JFgrafica.getContentPane());
+        JFgrafica.getContentPane().setLayout(JFgraficaLayout);
+        JFgraficaLayout.setHorizontalGroup(
+            JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1095, Short.MAX_VALUE)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 511, Short.MAX_VALUE)
+        JFgraficaLayout.setVerticalGroup(
+            JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
@@ -130,8 +139,21 @@ public class Fdatos extends javax.swing.JFrame {
         jLabel4.setText("Indicador:");
         jLabel4.setName("jLabel4"); // NOI18N
 
+        finicio.setName("finicio"); // NOI18N
+
         jLabel5.setText("Periodo:");
         jLabel5.setName("jLabel5"); // NOI18N
+
+        jLabel6.setText("Seleccione los datos que quiere graficar");
+        jLabel6.setName("jLabel6"); // NOI18N
+
+        jLabel7.setText("Inicio:");
+        jLabel7.setName("jLabel7"); // NOI18N
+
+        jLabel8.setText("Fin:");
+        jLabel8.setName("jLabel8"); // NOI18N
+
+        ffin.setName("ffin"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,33 +162,54 @@ public class Fdatos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79))
+                        .addComponent(JFgrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lencuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel6)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(ffin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(finicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))))
+                        .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1336, Short.MAX_VALUE)))
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1311, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JFgrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,19 +225,19 @@ public class Fdatos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel5)
-                        .addGap(248, 248, 248))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(34, 34, 34)
+                                .addComponent(finicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ffin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addContainerGap())))
         );
-
-        try {
-            jInternalFrame1.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,9 +261,9 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 
 private void lregionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lregionActionPerformed
 // TODO add your handling code here:
-      System.out.println("indice seleccionado "+lregion.getSelectedIndex());
+      
       if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lentidades.disable();lencuestas.disable();lindicadores.disable();}
-      if(lregion.getSelectedIndex()>0){lentidades.enable();llenarlentidades();lencuestas.enable();llenarlencuestas();}
+      if(lregion.getSelectedIndex()>0){lentidades.enable();llenarlentidades();}
 }//GEN-LAST:event_lregionActionPerformed
 
 private void lencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lencuestasActionPerformed
@@ -230,30 +273,34 @@ private void lencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
-    //código boton 1
-    //programar para cuando alguna de las listas tengo 0
     String a,b,c,d,campos,tablas;
-    tablas="com_region JOIN com_entidad JOIN com_plantilla JOIN com_indicador";
-    campos="com_region.REG_nombreregion AS region,com_entidad.DZN_NombreEntidad AS Entidad,com_entidad.DZN_descripcion AS descripcion_entidad,com_plantilla.PLA_NomPlantilla AS Encuesta,com_plantilla.PLA_Descripcion AS descripcion_encuesta,com_plantilla.PLA_Periodo AS Perido,com_indicador.IND_Nombre AS Indicador";
-    if(lregion.getSelectedIndex()<1){p1=new VDatos(campos,tablas,"WHERE com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id");p1.show();}
-    if(lregion.getSelectedIndex()>0){a=lregion.getSelectedItem().toString();
-        if(lentidades.getSelectedIndex()<1){/*De la region selccionada mostrar todas las entidades*/p1=new VDatos(campos,tablas,"WHERE com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");p1.show();}
-        if(lentidades.getSelectedIndex()>0){b=lentidades.getSelectedItem().toString();
-            if(lencuestas.getSelectedIndex()<1){/*de la entidad seleccionada mostrar todas las encuestas e indicadores*/}
-            if(lencuestas.getSelectedIndex()>0){c=lencuestas.getSelectedItem().toString();
-                if(lindicadores.getSelectedIndex()<1){/*Mostrar de la encuesta seleccionada todos los indicadores*/}
-                if(lindicadores.getSelectedIndex()>0){d=lindicadores.getSelectedItem().toString();
-                    //String campos, String tablas, String condicion
-                    p1=new VDatos(campos,tablas,"where com_region.REG_id=com_entidad.DZN_Region AND com_region.REG_Encuesta=com_plantilla.PLA_id AND com_plantilla.PLA_indicador=com_indicador.IND_id and com_region.REG_nombreRegion='"+a+"' and com_entidad.DZN_NombreEntidad='"+b+"' and com_plantilla.PLA_NomPlantilla='"+c+"' and com_indicador.IND_Nombre='"+d+"'");
-                    p1.show();
-                }
-            }
-        }
-    
+    tablas="com_plantilla C INNER JOIN com_region B  INNER JOIN com_entidad A INNER JOIN com_indicador D";
+    campos="B.REG_nombreregion AS region,A.DZN_NombreEntidad AS Entidad,A.DZN_descripcion AS descripcion_entidad,C.PLA_NomPlantilla AS Encuesta,C.PLA_Descripcion AS descripcion_encuesta,C.PLA_Registro AS Perido,D.IND_Nombre AS Indicador";
+    if(lregion.getSelectedIndex()<1|lentidades.getSelectedIndex()<1|lencuestas.getSelectedIndex()<1|lindicadores.getSelectedIndex()<1|finicio.getDate()==null|ffin.getDate()==null){
+        //para mostrar todo p1=new VDatos(campos,tablas,"ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID");
+       JOptionPane.showMessageDialog(null, "No se han llenado todos los campos requeridos para la consulta, por favor verifique que"
+               + " todos los campos estan debidamente llenados e intente de nuevo ", "Error, campos vacíos", JOptionPane.ERROR_MESSAGE);
+        
     }
     
-    VDatos ver=new VDatos("*","com_region JOIN com_entidad JOIN com_plantilla JOIN com_indicador","where ");
+      if(lregion.getSelectedIndex()>0&&lentidades.getSelectedIndex()>0&&lencuestas.getSelectedIndex()>0&&lindicadores.getSelectedIndex()>0&&finicio.getDate()!=null&&ffin.getDate()!=null){
+                    a=lregion.getSelectedItem().toString();
+                    b=lentidades.getSelectedItem().toString();
+                    c=lencuestas.getSelectedItem().toString();
+                    d=lindicadores.getSelectedItem().toString();
+                    p1=new VDatos(campos,tablas,"ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID AND B.REG_NOMBREREGION='"+a+"' AND A.DZN_NOMBREENTIDAD='"+b+"' AND C.PLA_NOMPLANTILLA='"+c+"'and D.IND_NOMBRE='"+d+"' AND C.PLA_REGISTRO>='"+finicio.getDate().toLocaleString()+"' AND C.PLA_REGISTRO<='"+ffin.getDate().toLocaleString()+"'");
+      /*Consulta usada SELECT B.REG_nombreregion AS region,A.DZN_NombreEntidad AS Entidad,A.DZN_descripcion AS descripcion_entidad,C.PLA_NomPlantilla AS Encuesta,C.PLA_Descripcion AS descripcion_encuesta,C.PLA_Registro AS Perido,D.IND_Nombre AS Indicador FROM com_plantilla C INNER JOIN com_region B  INNER JOIN com_entidad A INNER JOIN com_indicador D ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID 
+        AND B.REG_NOMBREREGION="veracruz" AND A.DZN_NOMBREENTIDAD="xalapa" AND C.PLA_NOMPLANTILLA="plantilla1" AND D.IND_NOMBRE="indicador1" AND C.PLA_REGISTRO>="2012/11/01"*/
+      }
+    
+    p1.show();
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lentidadesActionPerformed
+// TODO add your handling code here:
+    if(lentidades.getSelectedIndex()<1){lindicadores.setSelectedIndex(-1);lindicadores.disable();}
+    if(lentidades.getSelectedIndex()>0){lencuestas.enable();llenarlencuestas();}
+}//GEN-LAST:event_lentidadesActionPerformed
 public void limpiar(){
     lregion.removeAllItems();
     lentidades.removeAllItems();
@@ -288,7 +335,6 @@ for (int n=0;n<d.length;n++){l.addItem(d[n]);}
 public void llenarlregion(){
     
     rs1=con.select(con, "Reg_nombreRegion", "com_region", "");
-    System.out.println("Total de resultados "+contarresultados(rs1,dregiones));
     dregiones=new String[contarresultados(rs1,dregiones)];
     llenararreglo(dregiones,rs1);//metemos los datos a un arreglo
     lregion.addItem(" ");
@@ -299,8 +345,6 @@ public void llenarlregion(){
 public void llenarlentidades(){//método que llena la lista de entidades
     lentidades.removeAllItems();
     rs2=con.select(con, "DZN_NombreEntidad", "com_entidad,com_region", "where com_entidad.DZN_Region=com_region.REG_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");
-    //rs2=con.select(con, "DZN_NombreEntidad", "com_entidad", "");
-    System.out.println("Total de resultados "+contarresultados(rs2,dentidades));
     dentidades=new String[contarresultados(rs2,dentidades)];
     llenararreglo(dentidades,rs2);//metemos los datos a un 
     lentidades.addItem(" ");
@@ -309,9 +353,7 @@ public void llenarlentidades(){//método que llena la lista de entidades
 }
 public void llenarlencuestas(){//método que llena la lista de encuestas
     lencuestas.removeAllItems();
-    rs3=con.select(con, "com_plantilla.PLA_NomPlantilla", "com_plantilLa,com_region", "where com_region.REG_Encuesta=com_plantilla.PLA_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");
-    //rs3=con.select(con, "com_plantila.PLA_nomPlantilla", "com_plantila", "");
-    System.out.println("Total de resultados "+contarresultados(rs3,dencuestas));
+    rs3=con.select(con, "A.PLA_nomplantilla", "com_plantilla A JOIN com_entidad B", "ON A.PLA_Entidad = B.DZN_id AND B.DZN_NombreEntidad='"+lentidades.getSelectedItem().toString()+"'");System.out.println("Aqui");
     dencuestas=new String[contarresultados(rs3,dencuestas)];
     llenararreglo(dencuestas,rs3);//metemos los datos a un arreglo
     lencuestas.addItem(" ");
@@ -321,8 +363,6 @@ public void llenarlencuestas(){//método que llena la lista de encuestas
 public void llenarlindicadores(){//método que llena la lista de indicadores
     lindicadores.removeAllItems();
     rs4=con.select(con, "com_indicador.IND_Nombre", "com_indicador JOIN com_plantilla", "WHERE com_indicador.IND_id=com_Plantilla.PLA_Indicador AND com_plantilla.PLA_nomPlantilla='"+lencuestas.getSelectedItem().toString()+"'");
-    //rs4=con.select(con, "com_indicador.IND_Nombre", "com_indicador", "");
-    System.out.println("Total de resultados "+contarresultados(rs4,dindicadores));
     dindicadores=new String[contarresultados(rs4,dindicadores)];
     llenararreglo(dindicadores,rs4);//metemos los datos a un arreglo
     lindicadores.addItem(" ");
@@ -370,13 +410,18 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame JFgrafica;
+    private com.toedter.calendar.JDateChooser ffin;
+    private com.toedter.calendar.JDateChooser finicio;
     private javax.swing.JButton jButton1;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JComboBox lencuestas;
     private javax.swing.JComboBox lentidades;
