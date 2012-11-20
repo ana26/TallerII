@@ -48,6 +48,7 @@ String campos, tablas, condicion;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -76,7 +77,6 @@ String campos, tablas, condicion;
             }
         });
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setColumnSelectionAllowed(false);
         tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla.setEditingColumn(0);
         tabla.setEditingRow(0);
