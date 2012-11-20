@@ -90,6 +90,9 @@
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="G&#xe1;ficas"/>
               </AccessibilityProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Gr&#xe1;ficasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

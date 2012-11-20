@@ -141,6 +141,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jMenu1.add(SubMenuDetalleEncuesta);
 
         Gráficas.setText("Gráficas");
+        Gráficas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GráficasActionPerformed(evt);
+            }
+        });
         jMenu1.add(Gráficas);
         Gráficas.getAccessibleContext().setAccessibleName("Gáficas");
 
@@ -215,6 +220,12 @@ private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_jMenu1ActionPerformed
+
+private void GráficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GráficasActionPerformed
+// TODO add your handling code here:
+    Fdatos graficas=new Fdatos();
+    graficas.show();
+}//GEN-LAST:event_GráficasActionPerformed
      /**
     * @param args the command line arguments
     */
