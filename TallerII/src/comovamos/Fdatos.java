@@ -26,6 +26,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class Fdatos extends javax.swing.JFrame {
 private Guardado guardar=new Guardado();
+private String usuario;
+private String contraseña;
     /** Creates new form Fdatos */
     public Fdatos() {
         initComponents();
@@ -338,6 +340,15 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
 // TODO add your handling code here:
+        this.usuario="";
+        this.contraseña="";
+        try {
+            Conexion conec = new Conexion(this.usuario, this.contraseña);
+        } catch (SQLException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(1.0, "Fila 1", "Columna 1");
         dataset.addValue(5.0, "Fila 1", "Columna 2");
@@ -360,9 +371,11 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 );
         System.out.println(chart);
         ChartPanel chartPanel = new ChartPanel(chart, false);
+        
         JFgrafica.setContentPane(chartPanel);
         JFgrafica.setVisible(true);        
         Exportar.setEnabled(true);
+        
         guardar.Graficas(chart);
     
 }//GEN-LAST:event_GraficaActionPerformed
