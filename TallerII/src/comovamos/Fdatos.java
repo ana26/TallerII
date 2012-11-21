@@ -367,6 +367,8 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(1.0, "Fila 1", "Columna 1");
         dataset.addValue(5.0, "Fila 1", "Columna 2");
