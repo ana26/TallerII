@@ -209,7 +209,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_SubMenuEncuestaActionPerformed
 
 private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-   encuesta h4 = new encuesta();
+   frmEntidad h4 = new frmEntidad();
          mainPanel.add(h4);
          h4.setVisible(true);
          h4.setSize(new Dimension(1275, 700));

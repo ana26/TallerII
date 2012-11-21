@@ -8,6 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 //import org.jdesktop.application.Action;
 
 /*
@@ -20,10 +25,13 @@ import javax.swing.JOptionPane;
  * @author Carlos Benjamín Chablé Mínkez
  */
 public class Fdatos extends javax.swing.JFrame {
-
+private Guardado guardar=new Guardado();
+private String usuario;
+private String contraseña;
     /** Creates new form Fdatos */
     public Fdatos() {
         initComponents();
+        guardar.setEnabled(false);
         setLocationRelativeTo(null);
     }
 
@@ -53,6 +61,8 @@ public class Fdatos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         ffin = new com.toedter.calendar.JDateChooser();
+        Grafica = new javax.swing.JButton();
+        Exportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtrado de datos");
@@ -124,7 +134,7 @@ public class Fdatos extends javax.swing.JFrame {
         );
         JFgraficaLayout.setVerticalGroup(
             JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
@@ -155,6 +165,23 @@ public class Fdatos extends javax.swing.JFrame {
 
         ffin.setName("ffin"); // NOI18N
 
+        Grafica.setText("Generar Graf.");
+        Grafica.setName("Grafica"); // NOI18N
+        Grafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GraficaActionPerformed(evt);
+            }
+        });
+
+        Exportar.setText("Exportar");
+        Exportar.setEnabled(false);
+        Exportar.setName("Exportar"); // NOI18N
+        Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,7 +206,9 @@ public class Fdatos extends javax.swing.JFrame {
                                             .addComponent(lentidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lregion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel6)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Exportar)
+                                        .addComponent(jLabel6))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(69, 69, 69)
                                 .addComponent(jLabel5))
@@ -191,7 +220,10 @@ public class Fdatos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(ffin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(finicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))))
+                                    .addComponent(finicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Grafica)))
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -236,7 +268,11 @@ public class Fdatos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ffin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Grafica)
+                            .addComponent(Exportar))
+                        .addGap(61, 61, 61))))
         );
 
         pack();
@@ -301,6 +337,57 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     if(lentidades.getSelectedIndex()<1){lindicadores.setSelectedIndex(-1);lindicadores.disable();}
     if(lentidades.getSelectedIndex()>0){lencuestas.enable();llenarlencuestas();}
 }//GEN-LAST:event_lentidadesActionPerformed
+
+private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
+// TODO add your handling code here:
+        this.usuario="";
+        this.contraseña="";
+        try {
+            Conexion conec = new Conexion(this.usuario, this.contraseña);
+        } catch (SQLException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1.0, "Fila 1", "Columna 1");
+        dataset.addValue(5.0, "Fila 1", "Columna 2");
+        dataset.addValue(3.0, "Fila 1", "Columna 3");
+        dataset.addValue(2.0, "Fila 2", "Columna 1");
+        dataset.addValue(3.0, "Fila 2", "Columna 2");
+        dataset.addValue(2.0, "Fila 2", "Columna 3");
+        dataset.addValue(10.0,"Fila 3", "Columna 4");
+        dataset.addValue(10.0,"Fila 3", "Columna 4");
+
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Xalapa",
+                "Categorías", //Categorías
+                "Valores", // Valores
+                dataset, // data
+                PlotOrientation.VERTICAL, // OrientaciÃ³n
+                true, // include legend
+                true, // tooltips?
+                true // URLs?
+                );
+        System.out.println(chart);
+        ChartPanel chartPanel = new ChartPanel(chart, false);
+        
+        JFgrafica.setContentPane(chartPanel);
+        JFgrafica.setVisible(true);        
+        Exportar.setEnabled(true);
+        
+        guardar.Graficas(chart);
+    
+}//GEN-LAST:event_GraficaActionPerformed
+
+private void ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportarActionPerformed
+// TODO add your handling code here:
+    guardar.setVisible(true);
+    guardar.setEnabled(true);
+    
+    
+    
+}//GEN-LAST:event_ExportarActionPerformed
 public void limpiar(){
     lregion.removeAllItems();
     lentidades.removeAllItems();
@@ -410,6 +497,8 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exportar;
+    private javax.swing.JButton Grafica;
     private javax.swing.JInternalFrame JFgrafica;
     private com.toedter.calendar.JDateChooser ffin;
     private com.toedter.calendar.JDateChooser finicio;

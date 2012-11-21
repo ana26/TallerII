@@ -49,7 +49,10 @@
                                           <Component id="lindicadores" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="Exportar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -67,6 +70,10 @@
                                   <Component id="ffin" alignment="0" max="32767" attributes="1"/>
                                   <Component id="finicio" alignment="0" pref="135" max="32767" attributes="1"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Grafica" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -126,7 +133,12 @@
                           <Component id="ffin" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Grafica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Exportar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -252,7 +264,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="553" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="555" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -314,6 +326,25 @@
       <Properties>
         <Property name="name" type="java.lang.String" value="ffin" noResource="true"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Grafica">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generar Graf."/>
+        <Property name="name" type="java.lang.String" value="Grafica" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GraficaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Exportar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar"/>
+        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="name" type="java.lang.String" value="Exportar" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
