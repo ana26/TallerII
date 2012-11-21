@@ -54,7 +54,7 @@ public class Fdatos extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         ffin = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtrado de datos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -96,7 +96,7 @@ public class Fdatos extends javax.swing.JFrame {
         jToolBar1.setAutoscrolls(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Home\\Documents\\NetBeansProjects\\TI2\\src\\resources\\Aceptar.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Guardar.png"))); // NOI18N
         jButton1.setToolTipText("Aplicar");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -124,7 +124,7 @@ public class Fdatos extends javax.swing.JFrame {
         );
         JFgraficaLayout.setVerticalGroup(
             JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGap(0, 553, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
