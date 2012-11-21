@@ -1,13 +1,24 @@
 package comovamos;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Guardado extends javax.swing.JFrame {
-    DefaultCategoryDataset mdatos= new DefaultCategoryDataset();
-    public CGBarras grafica=new CGBarras("","","",mdatos);
+   // DefaultCategoryDataset mdatos= new DefaultCategoryDataset();
+    //public CGBarras grafica=new CGBarras("","","",mdatos);
+    private JFreeChart grafico;
     public Guardado() {
         initComponents();
     }
@@ -27,7 +38,7 @@ public class Guardado extends javax.swing.JFrame {
         jRadioButton9 = new javax.swing.JRadioButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Grupo1.add(jRadioButton1);
         jRadioButton1.setText("PDF");
@@ -168,8 +179,49 @@ public class Guardado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-public void Graficas(CGBarras grafica){
- this.grafica=grafica;   
+public void exportar(String n,int x, int y, String tipo, JFreeChart grafico){
+    if(tipo.equals("2")){
+            try {              
+                ChartUtilities.saveChartAsJPEG(new File(n+".jpg"), grafico, y,x);
+            }catch (IOException e) {
+                System.err.println("Error creando grafico.");
+            }
+            }else{
+                if(tipo.equals("1")){
+                    try {
+                        OutputStream file = new FileOutputStream(new File(n+".pdf"));
+                        Document document = new Document();                        
+                        PdfWriter.getInstance(document, file);
+                        document.open();
+                        document.add(new Paragraph("Aquí el gráfico:\n"));
+                        ChartUtilities.saveChartAsJPEG(new File(n+".jpg"), grafico, y,x);                       
+                        Image imagen=Image.getInstance(n+".jpg");
+                        document.add(imagen);
+                        File borrar=new File(n+".jpg");
+                        borrar.delete();
+                        document.close();
+                        file.close();
+                        JOptionPane.showMessageDialog(null,"Se creó el pdf satisfactoriamente");
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    
+                }else{
+                    if(tipo.equals("3")){
+                        try {    
+                            ChartUtilities.saveChartAsPNG(new File(n+".png"), grafico, y,x);
+                        }catch (IOException e) {
+                        System.err.println("Error creando grafico.");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No está el tipo de formato para guardado");
+                        }
+                    }
+                }
+}    
+
+public void Graficas(JFreeChart grafica){
+ this.grafico=grafica;   
 }
 private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
     this.jRadioButton2.setSelected(false);
@@ -268,7 +320,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     int seleccion = explorador.showDialog(null, "Guardar");
     switch(seleccion) {
         case JFileChooser.APPROVE_OPTION:    
-            grafica.exportargrafico(explorador.getSelectedFile().toString(), Integer.parseInt(alto), Integer.parseInt(ancho), dato);
+            exportar(explorador.getSelectedFile().toString(), Integer.parseInt(alto), Integer.parseInt(ancho), dato,this.grafico);
         break;
         case JFileChooser.CANCEL_OPTION:
             //dio click en cancelar o cerro la ventana
