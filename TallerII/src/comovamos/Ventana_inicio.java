@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.sql.*;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -222,6 +224,21 @@ public class Ventana_inicio extends javax.swing.JFrame {
                             setVisible(false);
                     
                              //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
+                            try{
+                            FileOutputStream ob=new FileOutputStream("ob.obj");
+                                 ObjectOutputStream sal=new ObjectOutputStream(ob);
+                                 sal.writeUTF(txt_usuario.getText());
+                                 sal.close();
+
+                                 FileOutputStream ob2=new FileOutputStream("ob2.obj");
+                                 ObjectOutputStream sal2=new ObjectOutputStream(ob2);
+                                 sal2.writeUTF(txt_contra.getText());
+                                 sal2.close();
+                            }
+                            catch(Exception ex){
+                                
+                            }
+                            
                               Menu_Principal f = new Menu_Principal();
                               f.setVisible(true);
 

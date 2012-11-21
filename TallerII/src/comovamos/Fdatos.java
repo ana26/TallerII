@@ -2,6 +2,8 @@ package comovamos;
 
 
 import com.toedter.calendar.JDateChooser;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -342,6 +344,22 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 // TODO add your handling code here:
         this.usuario="";
         this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+            
+        }
+
+        
+        
         try {
             Conexion conec = new Conexion(this.usuario, this.contraseña);
         } catch (SQLException ex) {
