@@ -29,6 +29,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class Fdatos extends javax.swing.JFrame {
 private Guardado guardar=new Guardado();
 private String usuario;
+private Conexion conec;
 private String contraseña;
     /** Creates new form Fdatos */
     public Fdatos() {
@@ -357,14 +358,16 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         catch(Exception e){
             
         }
-
-        
-        
         try {
-            Conexion conec = new Conexion(this.usuario, this.contraseña);
+            this.conec = new Conexion(this.usuario, this.contraseña);
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.conec.consulta("select * from ");
+        } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
