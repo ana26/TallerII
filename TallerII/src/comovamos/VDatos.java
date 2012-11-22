@@ -136,7 +136,7 @@ String campos, tablas, condicion;
                 
       
         try {//obtenemos los nombres de las columnas y armamos la tabla
-         if(res.next()){res.first();
+         if(res.next()){res.beforeFirst();
              tdatos=new String[res.getMetaData().getColumnCount()];
          while(n<(res.getMetaData().getColumnCount()+1)){   
             modelo.addColumn(res.getMetaData().getColumnLabel(n));
@@ -160,7 +160,7 @@ String campos, tablas, condicion;
          try {
              
              datos=new String[res.getMetaData().getColumnCount()];
-                                
+                res.beforeFirst();                
                 while(res.next()){
                     for(int i=0;i<res.getMetaData().getColumnCount();i++){
                         System.out.println(""+tdatos[i]);
