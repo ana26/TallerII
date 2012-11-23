@@ -236,7 +236,7 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,7 +271,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField contrasena;
     private javax.swing.JTextField correoElectronico;
     private javax.swing.JTextField direccionCompleta;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    public javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
