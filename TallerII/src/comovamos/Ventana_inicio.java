@@ -222,7 +222,8 @@ public class Ventana_inicio extends javax.swing.JFrame {
                     if ( txt_contra.getText().length() > 0) {
                         if(validarUsuario(txt_usuario.getText(),txt_contra.getText())) {
                             setVisible(false);
-                    
+                             
+                             //Marisol no toques este código
                              //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
                             try{
                             FileOutputStream ob=new FileOutputStream("ob.obj");
