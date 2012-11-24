@@ -96,6 +96,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
+        usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         usuario.setText("Usuarios");
         jMenu1.add(usuario);
 
@@ -108,12 +109,15 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
         jMenu1.add(SubMenuEncuesta);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Perfiles");
         jMenu1.add(jMenuItem4);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Actividades");
         jMenu1.add(jMenuItem5);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText("Entidades");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +144,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
         jMenu1.add(SubMenuDetalleEncuesta);
 
+        Gráficas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         Gráficas.setText("Gráficas");
         Gráficas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

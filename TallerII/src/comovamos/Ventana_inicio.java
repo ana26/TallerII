@@ -229,7 +229,8 @@ public class Ventana_inicio extends javax.swing.JFrame {
                             catch(Exception ex){                                
                             }                          
                               Menu_Principal f = new Menu_Principal();
-                              f.setVisible(true);            
+                              f.setVisible(true);      
+                              this.dispose();
                         }
                         else {
                             JOptionPane.showMessageDialog(null, "El usuario y/o contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -243,7 +244,6 @@ public class Ventana_inicio extends javax.swing.JFrame {
                     }
                 }
                 catch(Exception e1){
-
                 }
        //     }
         //};
