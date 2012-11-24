@@ -219,8 +219,8 @@ private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
-    Usuarios usuario=new Usuarios();
-    usuario.show();
+    Usuarios usuario1=new Usuarios();
+    usuario1.show();
 }//GEN-LAST:event_jMenu1ActionPerformed
 
 private void GráficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GráficasActionPerformed
