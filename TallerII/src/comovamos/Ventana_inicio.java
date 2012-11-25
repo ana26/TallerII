@@ -216,7 +216,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
                              //Marisol no toques este código
                              //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
                             try{
-                            FileOutputStream ob=new FileOutputStream("ob.obj");
+                                 FileOutputStream ob=new FileOutputStream("ob.obj");
                                  ObjectOutputStream sal=new ObjectOutputStream(ob);
                                  sal.writeUTF(txt_usuario.getText());
                                  sal.close();
