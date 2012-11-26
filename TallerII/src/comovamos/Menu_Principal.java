@@ -50,14 +50,14 @@ public class Menu_Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        SubMenuEncuesta = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        SubMenuIndicador = new javax.swing.JMenuItem();
-        SubMenuDetalleEncuesta = new javax.swing.JMenuItem();
-        Gráficas = new javax.swing.JMenuItem();
+        Subusuario = new javax.swing.JMenuItem();
+        Subencuestas = new javax.swing.JMenuItem();
+        Subperfiles = new javax.swing.JMenuItem();
+        SubActividades = new javax.swing.JMenuItem();
+        Subentidades = new javax.swing.JMenuItem();
+        SubIndicador = new javax.swing.JMenuItem();
+        SubDetalleEncuesta = new javax.swing.JMenuItem();
+        Subgraficas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -96,58 +96,63 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Usuarios");
-        jMenu1.add(jMenuItem1);
+        Subusuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        Subusuario.setText("Usuarios");
+        jMenu1.add(Subusuario);
 
-        SubMenuEncuesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        SubMenuEncuesta.setText("Encuestas");
-        SubMenuEncuesta.addActionListener(new java.awt.event.ActionListener() {
+        Subencuestas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        Subencuestas.setText("Encuestas");
+        Subencuestas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubMenuEncuestaActionPerformed(evt);
+                SubencuestasActionPerformed(evt);
             }
         });
-        jMenu1.add(SubMenuEncuesta);
+        jMenu1.add(Subencuestas);
 
-        jMenuItem4.setText("Perfiles");
-        jMenu1.add(jMenuItem4);
+        Subperfiles.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        Subperfiles.setText("Perfiles");
+        jMenu1.add(Subperfiles);
 
-        jMenuItem5.setText("Actividades");
-        jMenu1.add(jMenuItem5);
+        SubActividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        SubActividades.setText("Actividades");
+        jMenu1.add(SubActividades);
 
-        jMenuItem6.setText("Entidades");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        Subentidades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        Subentidades.setText("Entidades");
+        Subentidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                SubentidadesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        jMenu1.add(Subentidades);
 
-        SubMenuIndicador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        SubMenuIndicador.setText("Indicadores");
-        SubMenuIndicador.addActionListener(new java.awt.event.ActionListener() {
+        SubIndicador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        SubIndicador.setText("Indicadores");
+        SubIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubMenuIndicadorActionPerformed(evt);
+                SubIndicadorActionPerformed(evt);
             }
         });
-        jMenu1.add(SubMenuIndicador);
+        jMenu1.add(SubIndicador);
 
-        SubMenuDetalleEncuesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        SubMenuDetalleEncuesta.setText("DET_Encuestas");
-        SubMenuDetalleEncuesta.addActionListener(new java.awt.event.ActionListener() {
+        SubDetalleEncuesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        SubDetalleEncuesta.setText("DET_Encuestas");
+        SubDetalleEncuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubMenuDetalleEncuestaActionPerformed(evt);
+                SubDetalleEncuestaActionPerformed(evt);
             }
         });
-        jMenu1.add(SubMenuDetalleEncuesta);
+        jMenu1.add(SubDetalleEncuesta);
 
-        Gráficas.setText("Gráficas");
-        Gráficas.addActionListener(new java.awt.event.ActionListener() {
+        Subgraficas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        Subgraficas.setText("Gráficas");
+        Subgraficas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GráficasActionPerformed(evt);
+                SubgraficasActionPerformed(evt);
             }
         });
-        jMenu1.add(Gráficas);
-        Gráficas.getAccessibleContext().setAccessibleName("Gáficas");
+        jMenu1.add(Subgraficas);
+        Subgraficas.getAccessibleContext().setAccessibleName("Gáficas");
 
         jMenuBar1.add(jMenu1);
 
@@ -186,46 +191,48 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void SubMenuIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuIndicadorActionPerformed
+    private void SubIndicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubIndicadorActionPerformed
         /*****Oscar  -> NO Borrar por Favor***/
         frmIndicador h1 = new frmIndicador();
          mainPanel.add(h1);
          h1.setVisible(true);
          h1.setSize(new Dimension(1275, 700));
-    }//GEN-LAST:event_SubMenuIndicadorActionPerformed
+    }//GEN-LAST:event_SubIndicadorActionPerformed
 
-    private void SubMenuDetalleEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuDetalleEncuestaActionPerformed
+    private void SubDetalleEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubDetalleEncuestaActionPerformed
         frmDetaPregunta h2 = new frmDetaPregunta();
          mainPanel.add(h2);
          h2.setVisible(true);
          h2.setSize(new Dimension(1275, 700));
-    }//GEN-LAST:event_SubMenuDetalleEncuestaActionPerformed
+    }//GEN-LAST:event_SubDetalleEncuestaActionPerformed
 
-    private void SubMenuEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuEncuestaActionPerformed
+    private void SubencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubencuestasActionPerformed
          frmPlantilla h2 = new frmPlantilla();
          mainPanel.add(h2);
          h2.setVisible(true);
          h2.setSize(new Dimension(1275, 700));
-    }//GEN-LAST:event_SubMenuEncuestaActionPerformed
+    }//GEN-LAST:event_SubencuestasActionPerformed
 
-private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+private void SubentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubentidadesActionPerformed
    frmEntidad h4 = new frmEntidad();
          mainPanel.add(h4);
          h4.setVisible(true);
          h4.setSize(new Dimension(1275, 700));
     
     // TODO add your handling code here:
-}//GEN-LAST:event_jMenuItem6ActionPerformed
+}//GEN-LAST:event_SubentidadesActionPerformed
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
+    Usuarios usuario1=new Usuarios();
+    usuario1.show();
 }//GEN-LAST:event_jMenu1ActionPerformed
 
-private void GráficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GráficasActionPerformed
+private void SubgraficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubgraficasActionPerformed
 // TODO add your handling code here:
     Fdatos graficas=new Fdatos();
     graficas.show();
-}//GEN-LAST:event_GráficasActionPerformed
+}//GEN-LAST:event_SubgraficasActionPerformed
      /**
     * @param args the command line arguments
     */
@@ -238,20 +245,20 @@ private void GráficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Gráficas;
-    private javax.swing.JMenuItem SubMenuDetalleEncuesta;
-    private javax.swing.JMenuItem SubMenuEncuesta;
-    private javax.swing.JMenuItem SubMenuIndicador;
+    private javax.swing.JMenuItem SubActividades;
+    private javax.swing.JMenuItem SubDetalleEncuesta;
+    private javax.swing.JMenuItem SubIndicador;
+    private javax.swing.JMenuItem Subencuestas;
+    private javax.swing.JMenuItem Subentidades;
+    private javax.swing.JMenuItem Subgraficas;
+    private javax.swing.JMenuItem Subperfiles;
+    public javax.swing.JMenuItem Subusuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
