@@ -5,12 +5,16 @@
 package comovamos;
 
 import comovamos.Usuarios;
+import javax.swing.JButton;
 
 /**
  *
  * @author LRRT
  */
 public class verUsuarios extends javax.swing.JFrame {
+    private JButton nuevo;
+    private JButton modificar;
+    private JButton eliminar;
 
     /**
      * Creates new form verUsuarios

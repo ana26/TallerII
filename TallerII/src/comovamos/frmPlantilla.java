@@ -206,19 +206,15 @@ void Cargar(){
             .addGroup(PanelLabelLayout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
                         .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap())
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
         );
         PanelLabelLayout.setVerticalGroup(
             PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +240,6 @@ void Cargar(){
         ToolPlantilla.setRollover(true);
 
         NuevoPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Agregar.png"))); // NOI18N
-        NuevoPlantilla.setText("Nuevo");
         NuevoPlantilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NuevoPlantillaActionPerformed(evt);
@@ -253,7 +248,6 @@ void Cargar(){
         ToolPlantilla.add(NuevoPlantilla);
 
         ModificarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Modificar.png"))); // NOI18N
-        ModificarPlantilla.setText("Modificar");
         ModificarPlantilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarPlantillaActionPerformed(evt);
@@ -262,7 +256,6 @@ void Cargar(){
         ToolPlantilla.add(ModificarPlantilla);
 
         AgregarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Guardar.png"))); // NOI18N
-        AgregarPlantilla.setText("Agregar");
         AgregarPlantilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarPlantillaActionPerformed(evt);
@@ -271,7 +264,6 @@ void Cargar(){
         ToolPlantilla.add(AgregarPlantilla);
 
         EliminarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Eliminar.png"))); // NOI18N
-        EliminarPlantilla.setText("Eliminar");
         EliminarPlantilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarPlantillaActionPerformed(evt);
@@ -279,8 +271,7 @@ void Cargar(){
         });
         ToolPlantilla.add(EliminarPlantilla);
 
-        BuscarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/search.png"))); // NOI18N
-        BuscarPlantilla.setText("Buscar");
+        BuscarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/boton_buscar.png"))); // NOI18N
         BuscarPlantilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarPlantillaActionPerformed(evt);
