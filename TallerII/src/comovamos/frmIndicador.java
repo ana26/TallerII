@@ -205,7 +205,6 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
         ToolIndicador.setRollover(true);
 
         NuevoIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Agregar.png"))); // NOI18N
-        NuevoIndicador.setText("Nuevo");
         NuevoIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NuevoIndicadorActionPerformed(evt);
@@ -214,7 +213,6 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
         ToolIndicador.add(NuevoIndicador);
 
         ModificarIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Modificar.png"))); // NOI18N
-        ModificarIndicador.setText("Modificar");
         ModificarIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarIndicadorActionPerformed(evt);
@@ -223,7 +221,6 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
         ToolIndicador.add(ModificarIndicador);
 
         AgregarIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Guardar.png"))); // NOI18N
-        AgregarIndicador.setText("Agregar");
         AgregarIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarIndicadorActionPerformed(evt);
@@ -232,7 +229,6 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
         ToolIndicador.add(AgregarIndicador);
 
         EliminarIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Eliminar.png"))); // NOI18N
-        EliminarIndicador.setText("Eliminar");
         EliminarIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarIndicadorActionPerformed(evt);
@@ -240,8 +236,7 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
         });
         ToolIndicador.add(EliminarIndicador);
 
-        BuscarIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/search.png"))); // NOI18N
-        BuscarIndicador.setText("Buscar");
+        BuscarIndicador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/boton_buscar.png"))); // NOI18N
         BuscarIndicador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarIndicadorActionPerformed(evt);
@@ -272,16 +267,14 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
             .addGroup(PanelLabelLayout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
                         .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
         );
         PanelLabelLayout.setVerticalGroup(
@@ -420,7 +413,7 @@ TablaIndicadores.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEd
                         .addComponent(jButton1)
                         .addGap(55, 55, 55)
                         .addComponent(TablaEditable)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();

@@ -114,7 +114,6 @@ void Cargar(){
         ToolDetaPregunta.setRollover(true);
 
         NuevoDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Agregar.png"))); // NOI18N
-        NuevoDetaPregunta.setText("Nuevo");
         NuevoDetaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NuevoDetaPreguntaActionPerformed(evt);
@@ -123,7 +122,6 @@ void Cargar(){
         ToolDetaPregunta.add(NuevoDetaPregunta);
 
         ModificarDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Modificar.png"))); // NOI18N
-        ModificarDetaPregunta.setText("Modificar");
         ModificarDetaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarDetaPreguntaActionPerformed(evt);
@@ -132,7 +130,6 @@ void Cargar(){
         ToolDetaPregunta.add(ModificarDetaPregunta);
 
         AgregarDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Guardar.png"))); // NOI18N
-        AgregarDetaPregunta.setText("Agregar");
         AgregarDetaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarDetaPreguntaActionPerformed(evt);
@@ -141,7 +138,6 @@ void Cargar(){
         ToolDetaPregunta.add(AgregarDetaPregunta);
 
         EliminarDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Eliminar.png"))); // NOI18N
-        EliminarDetaPregunta.setText("Eliminar");
         EliminarDetaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarDetaPreguntaActionPerformed(evt);
@@ -149,8 +145,7 @@ void Cargar(){
         });
         ToolDetaPregunta.add(EliminarDetaPregunta);
 
-        BuscarDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/search.png"))); // NOI18N
-        BuscarDetaPregunta.setText("Buscar");
+        BuscarDetaPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/boton_buscar.png"))); // NOI18N
         BuscarDetaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarDetaPreguntaActionPerformed(evt);
@@ -179,26 +174,16 @@ void Cargar(){
         PanelLabel.setLayout(PanelLabelLayout);
         PanelLabelLayout.setHorizontalGroup(
             PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel2)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel4)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel1)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel3)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel7)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
-                    .addComponent(jLabel5)
-                    .addContainerGap())
-                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLabelLayout.createSequentialGroup()
+                .addGroup(PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         PanelLabelLayout.setVerticalGroup(
             PanelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
