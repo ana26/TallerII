@@ -236,7 +236,7 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -367,7 +367,11 @@ public class Usuarios extends javax.swing.JFrame {
     public void setTelefonoFijo(javax.swing.JTextField telefonoFijo) {
         this.telefonoFijo = telefonoFijo;
     }
-    private void habilitar(boolean hab) {
+
+    public void verUsuario(){
+        nuevoUsuario(false);
+    }
+    public void nuevoUsuario(boolean hab) {
         perfiles.setEnabled(hab);
         nombreUsuario.setEnabled(hab);
         contrasena.setEnabled(hab);

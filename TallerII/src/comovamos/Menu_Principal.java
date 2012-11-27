@@ -224,8 +224,8 @@ private void SubentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
-    Usuarios usuario1=new Usuarios();
-    usuario1.show();
+    verUsuarios listaUsuarios=new verUsuarios();
+    listaUsuarios.show();
 }//GEN-LAST:event_jMenu1ActionPerformed
 
 private void SubgraficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubgraficasActionPerformed
