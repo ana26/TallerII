@@ -227,7 +227,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
                                  sal2.close();
                             }
                             catch(Exception ex){                                
-                            }                          
+                            }                         
                               Menu_Principal f = new Menu_Principal();
                               f.setVisible(true);      
                               this.dispose();
