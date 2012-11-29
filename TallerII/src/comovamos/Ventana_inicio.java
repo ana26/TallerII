@@ -18,9 +18,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Ventana_inicio extends javax.swing.JFrame {
+    String usuarioperfil;
+    int idusuario;
+    String perfil;
 
     public Ventana_inicio() {
         initComponents();
+       
+         this.setLocationRelativeTo(null);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -204,18 +210,86 @@ public class Ventana_inicio extends javax.swing.JFrame {
             return false;
         }
      }
+     
+     //Metodo que recibe como parametro los datos de usuario y contraseña de quien esta ingresando al sistema
+ //y regresa el id_usuario del usuario que esta ingrendo al sistema
+    private int validarId_usuario(String usuario, String contra) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+             Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+            Statement instruccion = conn.createStatement();
+            ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"'");
+            if (resultado.first()){
+                if(resultado.getString("USU_usuario").equals(usuario) && resultado.getString("USU_contraseña").equals(contra)) {
+                        
+                         idusuario=resultado.getInt("USU_id");
+                }
+               return idusuario;
+            }
+       return idusuario;
+          
+                }       
+        catch(Exception e1) {
+       }
+         return idusuario;
+    }
+    //este metodo recibe el id_usuario que le pasa el metodo ValidarId_usuario y lo compara con el id_usuario dela tabla
+    //de la tabla de usuarios y luego hace un filtrado en la tabla de perfiles y regresa el nombre del perfil de quien esta 
+    //ingresando al sistema.
+    public String validarperfil( int idusuario){
+          try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+            Statement instruccion = conn.createStatement();
+            ResultSet resultado = instruccion.executeQuery("SELECT com_perfiles.PERF_nombre FROM com_usuarios, com_perfiles WHERE com_usuarios.USU_Perfiles = com_perfiles.PERF_id AND com_usuarios.USU_id = '"+idusuario+"';");
+            if (resultado.first()){
+                 perfil=resultado.getString("PERF_nombre");
+                     
+             } 
+               return perfil;
+              }
+             
+             catch(Exception e1){
+              return "no se encontro";
+                 
+             }                   
+    } 
+     
+     
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-            //ActionListener eAceptar = new ActionListener() {
-           // @Override
-           //public void actionPerformed(ActionEvent e) {
-                try{
-                    if ( txt_contra.getText().length() > 0) {
-                        if(validarUsuario(txt_usuario.getText(),txt_contra.getText())) {
-                            setVisible(false);
-                             
-                             //Marisol no toques este código
-                             //JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
-                            try{
+               try {  
+        
+        if ( txt_contra.getText().length() > 0) {
+              if(validarUsuario(txt_usuario.getText(),txt_contra.getText())){
+                  
+                  validarId_usuario(txt_usuario.getText(),txt_contra.getText());
+                                String sol;  
+                                sol=validarperfil(validarId_usuario(txt_usuario.getText(),txt_contra.getText())); 
+                                System.out.println(sol+"----Usuario que se encuentra en el sistema");
+              
+              
+               
+
+                             setVisible(false);
+                             Menu_Principal f = new Menu_Principal();
+                             f.setVisible(true);
+                         }  
+                      
+        }
+        
+        
+         if ( txt_contra.getText().length() < 1 && txt_usuario.getText().length() < 1){ 
+        JOptionPane.showMessageDialog(null,"Ingresa tu datos" );}
+ 
+        if ( txt_usuario.getText().length() < 1) { 
+        JOptionPane.showMessageDialog(null,"Ingresa tu usuario" );}
+        if ( txt_contra.getText().length() < 1) { 
+        JOptionPane.showMessageDialog(null,"Ingresa tu conraseña" );}
+        
+                                
+                                //Creado por Ana
+                           try{
                             FileOutputStream ob=new FileOutputStream("ob.obj");
                                  ObjectOutputStream sal=new ObjectOutputStream(ob);
                                  sal.writeUTF(txt_usuario.getText());
@@ -227,28 +301,15 @@ public class Ventana_inicio extends javax.swing.JFrame {
                                  sal2.close();
                             }
                             catch(Exception ex){                                
-                            }                         
-                              Menu_Principal f = new Menu_Principal();
-                              f.setVisible(true);      
-                              this.dispose();
-                        }
-                        else {
-                            JOptionPane.showMessageDialog(null, "El usuario y/o contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-                            txt_contra.setText("");
-                            txt_contra.requestFocusInWindow();
-                        }
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Favor de introducir la contraseña", "Error", JOptionPane.WARNING_MESSAGE);
-                        txt_contra.requestFocusInWindow();
-                    }
-                }
+                            }                          
+                      
+               
+     
+        
+    }
                 catch(Exception e1){
                 }
-       //     }
-        //};
-//}
-        //aceptar.addActionListener(eAceptar);
+   
 }//GEN-LAST:event_aceptarActionPerformed
 
     private void txt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuarioActionPerformed
@@ -258,7 +319,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecContr().setVisible(true);
+                new RecContrase().setVisible(true);
             }
         });
     }//GEN-LAST:event_jLabel4MouseClicked
