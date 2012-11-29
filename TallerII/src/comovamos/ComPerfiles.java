@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package comovamos;
-/*
+
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -98,4 +98,3 @@ public class ComPerfiles implements Serializable {
     }
     
 }
-*/

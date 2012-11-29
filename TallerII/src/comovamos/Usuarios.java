@@ -1,5 +1,11 @@
 package comovamos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JMenu;
+
 public class Usuarios extends javax.swing.JFrame {
     public Usuarios() {
         initComponents();
@@ -97,6 +103,11 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel8.setText("Teléfono celular");
 
         perfiles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione perfil", "Administrador", "Gerente", "Capturista Local", "Capturista Regional", "Experto" }));
+        perfiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilesActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Contraseña");
 
@@ -236,7 +247,7 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,6 +276,13 @@ public class Usuarios extends javax.swing.JFrame {
     private void correoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correoElectronicoActionPerformed
+
+    private void perfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilesActionPerformed
+    //List<ComPerfiles> lista(){
+    
+    
+    }      // TODO add your handling code here:
+    }//GEN-LAST:event_perfilesActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField confirmaContrasena;
@@ -372,16 +390,22 @@ public class Usuarios extends javax.swing.JFrame {
         nuevoUsuario(false);
     }
     public void nuevoUsuario(boolean hab) {
-        perfiles.setEnabled(hab);
-        nombreUsuario.setEnabled(hab);
-        contrasena.setEnabled(hab);
-        confirmaContrasena.setEnabled(hab);
-        nombreCompleto.setEnabled(hab);
-        direccionCompleta.setEnabled(hab);
+        perfiles.setEnabled(!hab);
+        nombreUsuario.setEnabled(!hab);
+        contrasena.setEnabled(!hab);
+        confirmaContrasena.setEnabled(!hab);
+        nombreCompleto.setEnabled(!hab);
+        direccionCompleta.setEnabled(!hab);
         telefonoFijo.setEnabled(!hab);
         telefonoCelular.setEnabled(!hab);
         correoElectronico.setEnabled(!hab);
         pregunta.setEnabled(!hab);
         respuesta.setEnabled(!hab);
     }
+    
+   
+    
+    
+    }
+}
 }
