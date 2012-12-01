@@ -27,7 +27,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Carlos Benjamín Chablé Mínkez
  */
 public class Fdatos extends javax.swing.JFrame {
-private Guardado guardar=new Guardado();
+private Guardado guardar = new Guardado();
 private String usuario;
 private Conexion conec;
 private String contraseña;
@@ -60,7 +60,7 @@ private String contraseña;
         }
         guardar.setEnabled(false);
         setLocationRelativeTo(null);
-        System.out.println(conec.getContraseña1());
+        
     }
 
     /** This method is called from within the constructor to
