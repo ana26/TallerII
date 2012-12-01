@@ -36,6 +36,7 @@ public String contraseña;
             this.contraseña=(String)sal2.readUTF();
             sal2.close();}
         catch(Exception e){
+           
             
         }
     }
