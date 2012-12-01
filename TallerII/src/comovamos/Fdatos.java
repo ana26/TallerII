@@ -34,11 +34,11 @@ private String contraseña;
     /** Creates new form Fdatos */
     public Fdatos() {
         initComponents();
-        guardar.setEnabled(false);
-        setLocationRelativeTo(null);
+        
         this.usuario="";
         this.contraseña="";
         try{
+            
             FileInputStream ob=new FileInputStream("ob.obj");
             ObjectInputStream sal=new ObjectInputStream(ob);
             this.usuario=(String)sal.readUTF();
@@ -51,12 +51,16 @@ private String contraseña;
         catch(Exception e){
                }
         try {
+            
             this.conec = new Conexion(this.usuario, this.contraseña);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo acceder al servidor de la Base de Datos, verifique que tiene conexion con acceso al servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        guardar.setEnabled(false);
+        setLocationRelativeTo(null);
+        System.out.println(conec.getContraseña1());
     }
 
     /** This method is called from within the constructor to

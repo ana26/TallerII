@@ -90,6 +90,7 @@ public void ejecutar(String sql)throws SQLException
             this.stm=con.getConnection().createStatement();
             this.pstm=con.getConnection().prepareStatement("select "+campos+" from "+tablas+" "+condicion);
             res=this.pstm.executeQuery();
+            System.out.println("hata aquí bien");
         }
         catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
