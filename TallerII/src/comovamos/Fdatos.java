@@ -340,11 +340,11 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 "Xalapa",
                 "Categorías", //Categorías
                 "Valores", // Valores
-                dataset, // data
-                PlotOrientation.VERTICAL, // OrientaciÃ³n
-                true, // include legend
-                true, // tooltips?
-                true // URLs?
+                dataset, // datos
+                PlotOrientation.VERTICAL, // Orientacion
+                true, 
+                true, 
+                true 
                 );
         System.out.println(chart);
         ChartPanel chartPanel = new ChartPanel(chart, false);
