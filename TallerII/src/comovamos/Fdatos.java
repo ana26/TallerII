@@ -36,6 +36,27 @@ private String contraseña;
         initComponents();
         guardar.setEnabled(false);
         setLocationRelativeTo(null);
+        this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+               }
+        try {
+            this.conec = new Conexion(this.usuario, this.contraseña);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder al servidor de la Base de Datos, verifique que tiene conexion con acceso al servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -270,15 +291,6 @@ private String contraseña;
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 // TODO add your handling code here:
     limpiar();
-    try {
-            //tabla.setEnabled(false);
-            con=new Conexion("tallerii1202","paul123");
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo acceder al servidor de la Base de Datos, verifique que tiene conexion con acceso al servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
     llenarlregion();
     //llenarlentidades();        llenarlindicadores();
     lentidades.disable();lencuestas.disable();lindicadores.disable();
@@ -304,35 +316,14 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
 // TODO add your handling code here:
-    /*    this.usuario="";
-        this.contraseña="";
-        try{
-            FileInputStream ob=new FileInputStream("ob.obj");
-            ObjectInputStream sal=new ObjectInputStream(ob);
-            this.usuario=(String)sal.readUTF();
-            sal.close();
-
-            FileInputStream ob2=new FileInputStream("ob2.obj");
-            ObjectInputStream sal2=new ObjectInputStream(ob2);
-            this.contraseña=(String)sal2.readUTF();
-            sal2.close();}
-        catch(Exception e){
-            
-        }
-        try {
-            this.conec = new Conexion(this.usuario, this.contraseña);
-        } catch (SQLException ex) {
-            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             this.conec.consulta("select * from ");
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      */
+      
 
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -407,7 +398,7 @@ for (int n=0;n<d.length;n++){l.addItem(d[n]);}
 }
 public void llenarlregion(){
     
-    rs1=con.select(con, "Reg_nombreRegion", "com_region", "");
+    rs1=conec.select(conec, "Reg_nombreRegion", "com_region", "");
     dregiones=new String[contarresultados(rs1,dregiones)];
     llenararreglo(dregiones,rs1);//metemos los datos a un arreglo
     lregion.addItem(" ");
@@ -417,7 +408,7 @@ public void llenarlregion(){
 
 public void llenarlentidades(){//método que llena la lista de entidades
     lentidades.removeAllItems();
-    rs2=con.select(con, "DZN_NombreEntidad", "com_entidad,com_region", "where com_entidad.DZN_Region=com_region.REG_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");
+    rs2=conec.select(conec, "DZN_NombreEntidad", "com_entidad, com_region", "where com_entidad.DZN_Region=com_region.REG_id and com_region.REG_nombreRegion='"+lregion.getSelectedItem().toString()+"'");
     dentidades=new String[contarresultados(rs2,dentidades)];
     llenararreglo(dentidades,rs2);//metemos los datos a un 
     lentidades.addItem(" ");
@@ -426,7 +417,7 @@ public void llenarlentidades(){//método que llena la lista de entidades
 }
 public void llenarlencuestas(){//método que llena la lista de encuestas
     lencuestas.removeAllItems();
-    rs3=con.select(con, "A.PLA_nomplantilla", "com_plantilla A JOIN com_entidad B", "ON A.PLA_Entidad = B.DZN_id AND B.DZN_NombreEntidad='"+lentidades.getSelectedItem().toString()+"'");System.out.println("Aqui");
+    rs3=conec.select(conec, "A.PLA_nomplantilla", "com_plantilla A JOIN com_entidad B", "ON A.PLA_Entidad = B.DZN_id AND B.DZN_NombreEntidad='"+lentidades.getSelectedItem().toString()+"'");System.out.println("Aqui");
     dencuestas=new String[contarresultados(rs3,dencuestas)];
     llenararreglo(dencuestas,rs3);//metemos los datos a un arreglo
     lencuestas.addItem(" ");
@@ -435,7 +426,7 @@ public void llenarlencuestas(){//método que llena la lista de encuestas
 }
 public void llenarlindicadores(){//método que llena la lista de indicadores
     lindicadores.removeAllItems();
-    rs4=con.select(con, "com_indicador.IND_Nombre", "com_indicador JOIN com_plantilla", "WHERE com_indicador.IND_id=com_Plantilla.PLA_Indicador AND com_plantilla.PLA_nomPlantilla='"+lencuestas.getSelectedItem().toString()+"'");
+    rs4=conec.select(conec, "com_indicador.IND_Nombre", "com_indicador JOIN com_plantilla", "WHERE com_indicador.IND_id=com_Plantilla.PLA_Indicador AND com_plantilla.PLA_nomPlantilla='"+lencuestas.getSelectedItem().toString()+"'");
     dindicadores=new String[contarresultados(rs4,dindicadores)];
     llenararreglo(dindicadores,rs4);//metemos los datos a un arreglo
     lindicadores.addItem(" ");
@@ -502,7 +493,7 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
     private javax.swing.JComboBox lindicadores;
     private javax.swing.JComboBox lregion;
     // End of variables declaration//GEN-END:variables
-    Conexion con;
+    
     ResultSet rs4,rs1,rs2,rs3;
     int l=0,m=0;
     boolean bindicadores=false;

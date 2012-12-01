@@ -98,7 +98,7 @@ public class DetaPregunta {
     }
     public static void conexionBaseDatos(String Usuario, String Password){
         try{
-            String url = "jdbc:mysql://localhost:3306/comovamos";
+            String url = "jdbc:mysql://25.2.76.228:3306/comovamos";
             String user = Usuario;
             String password = Password;
             cn = DriverManager.getConnection(url,user,password);
