@@ -193,7 +193,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
      private boolean validarUsuario(String usuario, String contra) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"';");
             if (resultado.first()){
@@ -217,7 +217,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-             Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+             Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"'");
             if (resultado.first()){
@@ -240,7 +240,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
     public String validarperfil( int idusuario){
           try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://148.226.81.254:3306/comovamos","tallerii1202","paul123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("SELECT com_perfiles.PERF_nombre FROM com_usuarios, com_perfiles WHERE com_usuarios.USU_Perfiles = com_perfiles.PERF_id AND com_usuarios.USU_id = '"+idusuario+"';");
             if (resultado.first()){
