@@ -1,5 +1,7 @@
 package comovamos;
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -14,10 +16,29 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 public class frmEntidad extends javax.swing.JInternalFrame {
-
+public String usuario;
+public String contraseña;
     /** Creates new form frmEntidad */
     public frmEntidad() {
         initComponents();
+        initComponents();
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+
+        }
+
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

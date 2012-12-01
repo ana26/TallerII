@@ -1,5 +1,7 @@
 package comovamos;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -34,11 +36,29 @@ public class frmIndicador extends javax.swing.JInternalFrame {
     String codmod;    
     //Llenar Encabezado de Campo de la Tabla
     String nombreColumnas[]={"IND_flag","IND_id","IND_Nombre","IND_Formula","IND_Color","IND_PadreNombre"};
-    
+    public String usuario;
+    public String contraseña;
     /** Creates new form frmIndicador */
     public frmIndicador() {
         initComponents();
         Cargar();
+        initComponents();
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+
+        }
+
     }
     
 void Cargar(){
