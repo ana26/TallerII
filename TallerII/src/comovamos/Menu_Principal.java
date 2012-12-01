@@ -98,6 +98,11 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         Subusuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         Subusuario.setText("Usuarios");
+        Subusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubusuarioActionPerformed(evt);
+            }
+        });
         jMenu1.add(Subusuario);
 
         Subencuestas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -233,6 +238,12 @@ private void SubgraficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Fdatos graficas=new Fdatos();
     graficas.show();
 }//GEN-LAST:event_SubgraficasActionPerformed
+
+private void SubusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubusuarioActionPerformed
+// TODO add your handling code here:
+    Usuarios usuarios = new Usuarios();
+    usuarios.show();
+}//GEN-LAST:event_SubusuarioActionPerformed
      /**
     * @param args the command line arguments
     */
