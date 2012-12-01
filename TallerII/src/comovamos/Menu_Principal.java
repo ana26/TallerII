@@ -8,13 +8,16 @@ package comovamos;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 /**
  *
  * @author Faby
  */
 public class Menu_Principal extends javax.swing.JFrame {
-
+public String usuario;
+public String contraseña;
 
     /** Creates new form Menu_Principal */
     public Menu_Principal() {
@@ -34,6 +37,21 @@ public class Menu_Principal extends javax.swing.JFrame {
         initComponents();
         setSize(1280,770);
         setResizable(false);
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+            
+        }
     }
 
     /** This method is called from within the constructor to

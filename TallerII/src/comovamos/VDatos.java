@@ -1,6 +1,8 @@
 package comovamos;
 
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VDatos extends javax.swing.JFrame {
 String campos, tablas, condicion;
+public String usuario;
+public String contraseña;
     
     public VDatos(String campos, String tablas, String condicion) {
         initComponents();
@@ -33,6 +37,21 @@ String campos, tablas, condicion;
     }
      public VDatos() {
         initComponents();
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+            
+        }
     }
     /** This method is called from within the constructor to
      * initialize the form.

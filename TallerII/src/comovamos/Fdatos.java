@@ -304,7 +304,7 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
 // TODO add your handling code here:
-        /*this.usuario="";
+        this.usuario="";
         this.contraseña="";
         try{
             FileInputStream ob=new FileInputStream("ob.obj");
@@ -330,7 +330,8 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             this.conec.consulta("select * from ");
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
+        
         
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

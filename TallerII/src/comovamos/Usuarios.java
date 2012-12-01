@@ -10,15 +10,34 @@
  */
 package comovamos;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 /**
  *
  * @author lalo01
  */
 public class Usuarios extends javax.swing.JFrame {
-
+public String usuario;
+public String contraseña;
     /** Creates new form Usuarios */
     public Usuarios() {
         initComponents();
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+            
+        }
     }
 
     /** This method is called from within the constructor to
