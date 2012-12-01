@@ -16,8 +16,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Guardado extends javax.swing.JFrame {
-   // DefaultCategoryDataset mdatos= new DefaultCategoryDataset();
-    //public CGBarras grafica=new CGBarras("","","",mdatos);
+ 
     private JFreeChart grafico;
     public Guardado() {
         initComponents();
