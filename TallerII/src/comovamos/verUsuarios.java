@@ -1,15 +1,36 @@
 package comovamos;
 
 import comovamos.Usuarios;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import javax.swing.JButton;
 
 public class verUsuarios extends javax.swing.JFrame {
     private JButton nuevo;
     private JButton modificar;
     private JButton eliminar;
+    public String usuario;
+    public String contraseña;
 
     public verUsuarios() {
         initComponents();
+        initComponents();
+         this.usuario="";
+        this.contraseña="";
+        try{
+            FileInputStream ob=new FileInputStream("ob.obj");
+            ObjectInputStream sal=new ObjectInputStream(ob);
+            this.usuario=(String)sal.readUTF();
+            sal.close();
+
+            FileInputStream ob2=new FileInputStream("ob2.obj");
+            ObjectInputStream sal2=new ObjectInputStream(ob2);
+            this.contraseña=(String)sal2.readUTF();
+            sal2.close();}
+        catch(Exception e){
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
