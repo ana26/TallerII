@@ -98,6 +98,10 @@ public void ejecutar(String sql)throws SQLException
         return res;
   }
   //regresa el id de la ultima insercion
+  //ejemplo con.getuinsert(Conexion,"com_plantilla.PLA_id","com_plantilla");
+  //regresa el el dela ultima inserción realizada a la tabla com_plantilla, 
+  //este método solo funciona con tablas en las que el campo id es autoincrementable y las inserciones se hacen automáticas
+  //es decir no se especifica un id, se pone 0 
    public ResultSet getuinsert(Conexion con,String col,String tabla){
    
    ResultSet res=null; 
