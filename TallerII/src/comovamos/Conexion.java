@@ -97,5 +97,39 @@ public void ejecutar(String sql)throws SQLException
         }
         return res;
   }
+  //regresa el id de la ultima insercion
+   public ResultSet getuinsert(Conexion con,String col,String tabla){
+   
+   ResultSet res=null; 
+      try {
+            stm=con.getConnection().createStatement();
+            pstm=con.getConnection().prepareStatement("SELECT MAX("+col+") AS id FROM "+tabla);
+            res=pstm.executeQuery();
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+   return res;
+   }
+   
+   ///permite hacer inserciones
+   //ejemplo Con.insert(Conexion,"Tabla1","1,'Nombre','Estado',2281102020,'2012-12-02'");
+   //Notese que los enteros no van entre '', los string y demas valores sí
+   public int insert(Conexion con,String tabla,String valores){
+   int r=-1;
+  
+       try{
+           System.out.println(valores);
+                   
+           stm=con.getConnection().createStatement();
+           pstm.clearParameters();
+           pstm=con.getConnection().prepareStatement("Insert into "+tabla+" values ("+valores+")");
+           r=pstm.executeUpdate();
+           System.out.println("aca ");
+        }catch(SQLException e){System.out.println("No se realizo la inserción "+e);}
+       return r;
+   }
 
 }
