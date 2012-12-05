@@ -82,9 +82,10 @@ public class Ventana_inicio extends javax.swing.JFrame {
             }
         });
 
-        Label_cont.setFont(new java.awt.Font("Verdana", 0, 14));
+        Label_cont.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         Label_cont.setText("Contraseña");
 
+        aceptar.setIcon(new javax.swing.ImageIcon("C:\\Users\\sol\\Documents\\GitHub\\TallerII\\Iconos\\Aceptar.png")); // NOI18N
         aceptar.setText("Entrar");
         aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,28 +127,28 @@ public class Ventana_inicio extends javax.swing.JFrame {
                         .addGap(105, 105, 105))
                     .addGroup(Panel_internoLayout.createSequentialGroup()
                         .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Label_nombre)
-                            .addComponent(Label_cont))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_contra, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                            .addComponent(txt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(Panel_internoLayout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jLabel4)
+                            .addGroup(Panel_internoLayout.createSequentialGroup()
+                                .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Label_nombre)
+                                    .addComponent(Label_cont))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_contra, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                                    .addComponent(txt_usuario)))
+                            .addGroup(Panel_internoLayout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addComponent(aceptar)
+                                .addGap(56, 56, 56)
+                                .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Salir)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())))
-            .addGroup(Panel_internoLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(aceptar)
-                .addGap(57, 57, 57)
-                .addComponent(Salir)
-                .addContainerGap(122, Short.MAX_VALUE))
         );
         Panel_internoLayout.setVerticalGroup(
             Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_internoLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(Label_como)
                 .addGap(83, 83, 83)
                 .addGroup(Panel_internoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,17 +171,11 @@ public class Ventana_inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel_interno, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Panel_interno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel_interno, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Panel_interno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
@@ -193,7 +188,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
      private boolean validarUsuario(String usuario, String contra) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/comovamos","root","123456");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"';");
             if (resultado.first()){
@@ -217,7 +212,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-             Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
+             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/comovamos","root","123456");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("select * from com_usuarios where USU_usuario = '"+usuario+"' and USU_contraseña = '"+contra+"'");
             if (resultado.first()){
@@ -240,11 +235,12 @@ public class Ventana_inicio extends javax.swing.JFrame {
     public String validarperfil( int idusuario){
           try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://25.2.76.228:3306/comovamos","root","123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/comovamos","root","123456");
             Statement instruccion = conn.createStatement();
             ResultSet resultado = instruccion.executeQuery("SELECT com_perfiles.PERF_nombre FROM com_usuarios, com_perfiles WHERE com_usuarios.USU_Perfiles = com_perfiles.PERF_id AND com_usuarios.USU_id = '"+idusuario+"';");
             if (resultado.first()){
                  perfil=resultado.getString("PERF_nombre");
+             
                      
              } 
                return perfil;
@@ -256,6 +252,9 @@ public class Ventana_inicio extends javax.swing.JFrame {
              }                   
     } 
      
+    
+    
+    
      
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
                try {  
@@ -263,16 +262,15 @@ public class Ventana_inicio extends javax.swing.JFrame {
         if ( txt_contra.getText().length() > 0) {
               if(validarUsuario(txt_usuario.getText(),txt_contra.getText())){
                   
-                  validarId_usuario(txt_usuario.getText(),txt_contra.getText());
+                     validarId_usuario(txt_usuario.getText(),txt_contra.getText());
                                 String sol;  
                                 sol=validarperfil(validarId_usuario(txt_usuario.getText(),txt_contra.getText())); 
                                 System.out.println(sol+"----Usuario que se encuentra en el sistema");
+                             
+                                //
               
-              
-               
-
                              setVisible(false);
-                             Menu_Principal f = new Menu_Principal();
+                             Menu_Principal f = new Menu_Principal(sol);
                              f.setVisible(true);
                          }  
                       
@@ -285,7 +283,7 @@ public class Ventana_inicio extends javax.swing.JFrame {
         if ( txt_usuario.getText().length() < 1) { 
         JOptionPane.showMessageDialog(null,"Ingresa tu usuario" );}
         if ( txt_contra.getText().length() < 1) { 
-        JOptionPane.showMessageDialog(null,"Ingresa tu conraseña" );}
+        JOptionPane.showMessageDialog(null,"Ingresa tu contraseña" );}
         
                                 
                                 //Creado por Ana
@@ -307,8 +305,11 @@ public class Ventana_inicio extends javax.swing.JFrame {
      
         
     }
-                catch(Exception e1){
+                catch(Exception ex){
                 }
+               
+               
+        
    
 }//GEN-LAST:event_aceptarActionPerformed
 
