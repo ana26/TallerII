@@ -273,10 +273,14 @@ public class Ventana_inicio extends javax.swing.JFrame {
                              Menu_Principal f = new Menu_Principal(sol);
                              f.setVisible(true);
                          }  
-                      
+             
+                   else{
+               JOptionPane.showMessageDialog(null,"el usuario no esta registrado" );
+              }   
         }
+            
         
-        
+        else
          if ( txt_contra.getText().length() < 1 && txt_usuario.getText().length() < 1){ 
         JOptionPane.showMessageDialog(null,"Ingresa tu datos" );}
  
@@ -285,9 +289,10 @@ public class Ventana_inicio extends javax.swing.JFrame {
         if ( txt_contra.getText().length() < 1) { 
         JOptionPane.showMessageDialog(null,"Ingresa tu contraseña" );}
         
+     
                                 
                                 //Creado por Ana
-                           try{
+                        /*   try{
                             FileOutputStream ob=new FileOutputStream("ob.obj");
                                  ObjectOutputStream sal=new ObjectOutputStream(ob);
                                  sal.writeUTF(txt_usuario.getText());
@@ -300,12 +305,11 @@ public class Ventana_inicio extends javax.swing.JFrame {
                             }
                             catch(Exception ex){                                
                             }                          
-                      
-               
-     
+                      */
         
     }
                 catch(Exception ex){
+                    
                 }
                
                
