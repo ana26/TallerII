@@ -77,6 +77,7 @@ public String contraseña;
         catch(Exception e){
             
         }
+        //Manda a llamar el metodo de Activar para desactivar o activar catalogos dependiendo del usuario que ingresa al sistema
         Activar( perfil);
     }
     
@@ -90,7 +91,7 @@ public String contraseña;
      */
     @SuppressWarnings("unchecked")
     //Metodo para activar y desactivar botones dependiendo del tipo de usuario que ingrese al sistema
-    
+    //toma como valor a la variable perfil que fue calculada en la ventana_inicio
     public void Activar(String perfil){ 
          System.out.println(perfil+"----Usuario a activar");
 
@@ -104,14 +105,14 @@ public String contraseña;
                Captura_Plantilla.show(true);
                Captura_Resultados.show(false);
                Indicadores.show(true);
-               Subentidades.show(false);
+               Subentidades.show(true);
                 //Carlos
-               SubGraficas.show(false);
+               SubGraficas.show(true);
                //Delia
-              Subusuario.show(false);
+              Subusuario.show(true);
                //Aldo
-               Captura_Plantilla.show(false);
-               SubActividades.show(false);
+               Captura_Plantilla.show(true);
+               SubActividades.show(true);
                
 
             }
