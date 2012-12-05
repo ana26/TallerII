@@ -52,7 +52,6 @@ private String contraseña;
         lencuestas = new javax.swing.JComboBox();
         lindicadores = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
         JFgrafica = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -109,19 +108,6 @@ private String contraseña;
         jToolBar1.setAutoscrolls(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comovamos/Iconos/Guardar.png"))); // NOI18N
-        jButton1.setToolTipText("Aplicar");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
-
         JFgrafica.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 0)));
         JFgrafica.setTitle("Gráfica de Barras");
         JFgrafica.setMaximumSize(new java.awt.Dimension(600, 800));
@@ -137,7 +123,7 @@ private String contraseña;
         );
         JFgraficaLayout.setVerticalGroup(
             JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGap(0, 558, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
@@ -310,31 +296,6 @@ private void lencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     if(lencuestas.getSelectedIndex()>0){lindicadores.enable();llenarlindicadores();}
 }//GEN-LAST:event_lencuestasActionPerformed
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:
-    String a,b,c,d,campos,tablas;
-    tablas="com_plantilla C INNER JOIN com_region B  INNER JOIN com_entidad A INNER JOIN com_indicador D";
-    campos="B.REG_nombreregion AS region,A.DZN_NombreEntidad AS Entidad,A.DZN_descripcion AS descripcion_entidad,C.PLA_NomPlantilla AS Encuesta,C.PLA_Descripcion AS descripcion_encuesta,C.PLA_Registro AS Perido,D.IND_Nombre AS Indicador";
-    if(lregion.getSelectedIndex()<1|lentidades.getSelectedIndex()<1|lencuestas.getSelectedIndex()<1|lindicadores.getSelectedIndex()<1|finicio.getDate()==null|ffin.getDate()==null){
-        //para mostrar todo p1=new VDatos(campos,tablas,"ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID");
-       JOptionPane.showMessageDialog(null, "No se han llenado todos los campos requeridos para la consulta, por favor verifique que"
-               + " todos los campos estan debidamente llenados e intente de nuevo ", "Error, campos vacíos", JOptionPane.ERROR_MESSAGE);
-        
-    }
-    
-      if(lregion.getSelectedIndex()>0&&lentidades.getSelectedIndex()>0&&lencuestas.getSelectedIndex()>0&&lindicadores.getSelectedIndex()>0&&finicio.getDate()!=null&&ffin.getDate()!=null){
-                    a=lregion.getSelectedItem().toString();
-                    b=lentidades.getSelectedItem().toString();
-                    c=lencuestas.getSelectedItem().toString();
-                    d=lindicadores.getSelectedItem().toString();
-                    p1=new VDatos(campos,tablas,"ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID AND B.REG_NOMBREREGION='"+a+"' AND A.DZN_NOMBREENTIDAD='"+b+"' AND C.PLA_NOMPLANTILLA='"+c+"'and D.IND_NOMBRE='"+d+"' AND C.PLA_REGISTRO>='"+finicio.getDate().toLocaleString()+"' AND C.PLA_REGISTRO<='"+ffin.getDate().toLocaleString()+"'");
-      /*Consulta usada SELECT B.REG_nombreregion AS region,A.DZN_NombreEntidad AS Entidad,A.DZN_descripcion AS descripcion_entidad,C.PLA_NomPlantilla AS Encuesta,C.PLA_Descripcion AS descripcion_encuesta,C.PLA_Registro AS Perido,D.IND_Nombre AS Indicador FROM com_plantilla C INNER JOIN com_region B  INNER JOIN com_entidad A INNER JOIN com_indicador D ON C.PLA_ENTIDAD=A.DZN_ID AND C.PLA_INDICADOR=D.IND_ID AND C.PLA_REGION=B.REG_ID 
-        AND B.REG_NOMBREREGION="veracruz" AND A.DZN_NOMBREENTIDAD="xalapa" AND C.PLA_NOMPLANTILLA="plantilla1" AND D.IND_NOMBRE="indicador1" AND C.PLA_REGISTRO>="2012/11/01"*/
-      }
-    
-    p1.show();
-}//GEN-LAST:event_jButton1ActionPerformed
-
 private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lentidadesActionPerformed
 // TODO add your handling code here:
     if(lentidades.getSelectedIndex()<1){lindicadores.setSelectedIndex(-1);lindicadores.disable();}
@@ -343,7 +304,7 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
 // TODO add your handling code here:
-        this.usuario="";
+       /* this.usuario="";
         this.contraseña="";
         try{
             FileInputStream ob=new FileInputStream("ob.obj");
@@ -369,7 +330,7 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             this.conec.consulta("select * from ");
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -386,11 +347,11 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 "Xalapa",
                 "Categorías", //Categorías
                 "Valores", // Valores
-                dataset, // data
-                PlotOrientation.VERTICAL, // OrientaciÃ³n
-                true, // include legend
-                true, // tooltips?
-                true // URLs?
+                dataset, // datos
+                PlotOrientation.VERTICAL, // Orientacion 
+                true, 
+                true, 
+                true 
                 );
         System.out.println(chart);
         ChartPanel chartPanel = new ChartPanel(chart, false);
@@ -525,7 +486,6 @@ public void llenarlindicadores(){//método que llena la lista de indicadores
     private javax.swing.JInternalFrame JFgrafica;
     private com.toedter.calendar.JDateChooser ffin;
     private com.toedter.calendar.JDateChooser finicio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
