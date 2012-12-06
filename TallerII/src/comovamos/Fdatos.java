@@ -28,9 +28,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class Fdatos extends javax.swing.JFrame {
 private Guardado guardar=new Guardado();
-private String usuario;
-private Conexion conec;
-private String contraseña;
+public DefaultCategoryDataset dataset;
     /** Creates new form Fdatos */
     public Fdatos() {
         initComponents();
@@ -66,7 +64,7 @@ private String contraseña;
         Grafica = new javax.swing.JButton();
         Exportar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Filtrado de datos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -123,7 +121,7 @@ private String contraseña;
         );
         JFgraficaLayout.setVerticalGroup(
             JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGap(0, 560, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
@@ -303,46 +301,36 @@ private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_lentidadesActionPerformed
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
-// TODO add your handling code here:
-       /* this.usuario="";
-        this.contraseña="";
-        try{
-            FileInputStream ob=new FileInputStream("ob.obj");
-            ObjectInputStream sal=new ObjectInputStream(ob);
-            this.usuario=(String)sal.readUTF();
-            sal.close();
-
-            FileInputStream ob2=new FileInputStream("ob2.obj");
-            ObjectInputStream sal2=new ObjectInputStream(ob2);
-            this.contraseña=(String)sal2.readUTF();
-            sal2.close();}
-        catch(Exception e){
+    
+    ResultSet r;
+        try {
+           /* r=con.consulta("select DET_Resultado,DET_Pregunta,REG_nombreRegion,DZN_NombreEntidad,IND_Nombre,"
+            + "PLA_NomPlantilla from com_indicador i join com_plantilla p join com_detallepreguntas d "
+            + "join com_region r join com_entidad e on d.DET_Plantilla=p.PLA_id and p.PLA_Indicador="
+            + "i.IND_id and p.PLA_Region=r.REG_id and p.PLA_Entidad=e.DZN_id");*/
+    if(this.lregion.getSelectedItem()==" "){
+            r = con.consulta("Select DET_Resultado,DET_Pregunta from com_detallepreguntas");
+            }
+    else{
+            r=con.consulta("select DET_Resultado,DET_Pregunta,REG_nombreRegion,DZN_NombreEntidad,IND_Nombre,PLA_NomPlantilla from com_indicador i join com_plantilla p join com_detallepreguntas d join com_region r join com_entidad e on d.DET_Plantilla=p.PLA_id and p.PLA_Indicador=i.IND_id and p.PLA_Region=r.REG_id and p.PLA_Entidad=e.DZN_id and r.REG_nombreRegion='"+this.lregion.getSelectedItem()+"' and e.DZN_NombreEntidad='"+this.lentidades.getSelectedItem()+"' and p.PLA_NomPlantilla='"+this.lencuestas.getSelectedItem()+"' and i.IND_Nombre='"+this.lindicadores.getSelectedItem()+"'");   }
             
-        }
-        try {
-            this.conec = new Conexion(this.usuario, this.contraseña);
+           // 
+            dataset  = new DefaultCategoryDataset();
+    System.out.println("Checando resultset");
+    
+    while(r.next()){
+   dataset.addValue(Integer.parseInt(r.getString(1)),r.getString(2),r.getString(2));
+   System.out.println(r.getString(1));
+   System.out.println(r.getString(2));
+    
+    }
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.conec.consulta("select * from ");
-        } catch (SQLException ex) {
-            Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+     
+   
         
-        
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(1.0, "Fila 1", "Columna 1");
-        dataset.addValue(5.0, "Fila 1", "Columna 2");
-        dataset.addValue(3.0, "Fila 1", "Columna 3");
-        dataset.addValue(2.0, "Fila 2", "Columna 1");
-        dataset.addValue(3.0, "Fila 2", "Columna 2");
-        dataset.addValue(2.0, "Fila 2", "Columna 3");
-        dataset.addValue(10.0,"Fila 3", "Columna 4");
-        dataset.addValue(10.0,"Fila 3", "Columna 4");
-
+       
         JFreeChart chart = ChartFactory.createBarChart(
                 "Xalapa",
                 "Categorías", //Categorías
