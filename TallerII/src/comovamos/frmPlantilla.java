@@ -15,17 +15,26 @@ public class frmPlantilla extends javax.swing.JFrame {
 
     /** Creates new form frmPlantilla */
     public frmPlantilla() {
-        initComponents();
-        grupo.add(jrcalculada);
-        grupo.add(jrncalculada);
-        modelo.addColumn("Pregunta");
-        modelo.addColumn("Tipo de pregunta");
-        modelo.addColumn("Tipo de calculo");
-        modelo.addColumn("Color");
-        tblpreguntas.setModel(modelo);
-        idusuario=1;
-        identidad=1;
-        idregion=1;
+        
+            initComponents();
+            try {
+            con=new Conexion("root","123");
+            } catch (SQLException ex) {
+            Logger.getLogger(frmPlantilla.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmPlantilla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            grupo.add(jrcalculada);
+            grupo.add(jrncalculada);
+            modelo.addColumn("Pregunta");
+            modelo.addColumn("Tipo de pregunta");
+            modelo.addColumn("Tipo de calculo");
+            modelo.addColumn("Color");
+            tblpreguntas.setModel(modelo);
+            idusuario=1;
+            identidad=1;
+            idregion=1;
+        
        
      
 
@@ -729,7 +738,7 @@ public void limpiar(){
     private javax.swing.JComboBox ttcalculo;
     private javax.swing.JTextField ttitulo;
     // End of variables declaration//GEN-END:variables
-    private Conector con=new Conector("comovamos");
+Conexion con;
     private DefaultTableModel modelo=new DefaultTableModel();
     private int idusuario,idregion,identidad;
     private ButtonGroup grupo = new ButtonGroup();
