@@ -275,6 +275,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo acceder al servidor de la Base de Datos, verifique que tiene conexion con acceso al servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
+            
             Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     llenarlregion();
