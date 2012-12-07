@@ -18,11 +18,13 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Fdatos extends javax.swing.JFrame {
 private Guardado guardar=new Guardado();
+private int i;
 public DefaultCategoryDataset dataset;
     public Fdatos() {
         initComponents();
         guardar.setEnabled(false);
         setLocationRelativeTo(null);
+        i=0;
     }
 
     @SuppressWarnings("unchecked")
@@ -105,7 +107,7 @@ public DefaultCategoryDataset dataset;
         );
         JFgraficaLayout.setVerticalGroup(
             JFgraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 561, Short.MAX_VALUE)
         );
 
         jLabel1.setText("Region:");
@@ -261,14 +263,15 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
             Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     llenarlregion();
+    llenarlencuestas(i);
     //llenarlentidades();        llenarlindicadores();
-    lentidades.disable();lencuestas.disable();lindicadores.disable();
+    lentidades.disable();lindicadores.disable();
 }//GEN-LAST:event_formWindowOpened
 
 private void lregionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lregionActionPerformed
 // TODO add your handling code here:
       
-      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lentidades.disable();lencuestas.disable();lindicadores.disable();}
+      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lentidades.disable();lindicadores.disable();}
       if(lregion.getSelectedIndex()>0){lentidades.enable();llenarlentidades();}
 }//GEN-LAST:event_lregionActionPerformed
 
@@ -280,7 +283,7 @@ private void lencuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void lentidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lentidadesActionPerformed
 // TODO add your handling code here:
     if(lentidades.getSelectedIndex()<1){lindicadores.setSelectedIndex(-1);lindicadores.disable();}
-    if(lentidades.getSelectedIndex()>0){lencuestas.enable();llenarlencuestas();}
+    if(lentidades.getSelectedIndex()>0){ i++;lencuestas.enable();llenarlencuestas(i);}
 }//GEN-LAST:event_lentidadesActionPerformed
 
 private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
@@ -291,29 +294,30 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             + "PLA_NomPlantilla from com_indicador i join com_plantilla p join com_detallepreguntas d "
             + "join com_region r join com_entidad e on d.DET_Plantilla=p.PLA_id and p.PLA_Indicador="
             + "i.IND_id and p.PLA_Region=r.REG_id and p.PLA_Entidad=e.DZN_id");*/
-    if(this.lregion.getSelectedItem()==" "){
+    if(this.lregion.getSelectedItem()==" "&&this.lencuestas.getSelectedItem()==" "){
             r = con.consulta("Select DET_Resultado,DET_Pregunta from com_detallepreguntas");
             }
     else{
-            r=con.consulta("select DET_Resultado,DET_Pregunta,REG_nombreRegion,DZN_NombreEntidad,IND_Nombre,PLA_NomPlantilla from com_indicador i join com_plantilla p join com_detallepreguntas d join com_region r join com_entidad e on d.DET_Plantilla=p.PLA_id and p.PLA_Indicador=i.IND_id and p.PLA_Region=r.REG_id and p.PLA_Entidad=e.DZN_id and r.REG_nombreRegion='"+this.lregion.getSelectedItem()+"' and e.DZN_NombreEntidad='"+this.lentidades.getSelectedItem()+"' and p.PLA_NomPlantilla='"+this.lencuestas.getSelectedItem()+"' and i.IND_Nombre='"+this.lindicadores.getSelectedItem()+"'");   }
+        if(this.lencuestas.getSelectedItem()!=" "&&this.lregion.getSelectedItem()==" "){
+            r=con.consulta("select DET_Resultado,DET_Pregunta,REG_nombreRegion from com_detallepreguntas join com_plantilla join com_region where com_plantilla.PLA_NomPlantilla='"+this.lencuestas.getSelectedItem()+"' and com_detallepreguntas.DET_Plantilla=com_plantilla.PLA_id and com_plantilla.PLA_Region=com_region.REG_id");
+        }else{
+            r=con.consulta("select DET_Resultado,DET_Pregunta,REG_nombreRegion,DZN_NombreEntidad,IND_Nombre,PLA_NomPlantilla from com_indicador i join com_plantilla p join com_detallepreguntas d join com_region r join com_entidad e on d.DET_Plantilla=p.PLA_id and p.PLA_Indicador=i.IND_id and p.PLA_Region=r.REG_id and p.PLA_Entidad=e.DZN_id and r.REG_nombreRegion='"+this.lregion.getSelectedItem()+"' and e.DZN_NombreEntidad='"+this.lentidades.getSelectedItem()+"' and p.PLA_NomPlantilla='"+this.lencuestas.getSelectedItem()+"' and i.IND_Nombre='"+this.lindicadores.getSelectedItem()+"'");   
+    }
+    }
             
            // 
             dataset  = new DefaultCategoryDataset();
     System.out.println("Checando resultset");
-    
+    int j=1;
     while(r.next()){
-   dataset.addValue(Integer.parseInt(r.getString(1)),r.getString(2),r.getString(2));
+   dataset.addValue(Integer.parseInt(r.getString(1)),j+r.getString(2),j+r.getString(3));
+   j++;
    System.out.println(r.getString(1));
    System.out.println(r.getString(2));
-    
     }
         } catch (SQLException ex) {
             Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
-   
-        
-       
         JFreeChart chart = ChartFactory.createBarChart(
                 "Xalapa",
                 "Categorías", //Categorías
@@ -393,13 +397,25 @@ public void llenarlentidades(){//método que llena la lista de entidades
     llenarlista(dentidades,lentidades);//metemos el arreglo a la lista
     
 }
-public void llenarlencuestas(){//método que llena la lista de encuestas
+public void llenarlencuestas(int i){//método que llena la lista de encuestas
+    if(i==0){
+            try {
+                lencuestas.removeAllItems();
+                ResultSet r=con.consulta("select*from com_plantilla");
+                while(r.next()){
+                    lencuestas.addItem(r.getString(2));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Fdatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }else{
     lencuestas.removeAllItems();
     rs3=con.select(con, "A.PLA_nomplantilla", "com_plantilla A JOIN com_entidad B", "ON A.PLA_Entidad = B.DZN_id AND B.DZN_NombreEntidad='"+lentidades.getSelectedItem().toString()+"'");System.out.println("Aqui");
     dencuestas=new String[contarresultados(rs3,dencuestas)];
     llenararreglo(dencuestas,rs3);//metemos los datos a un arreglo
     lencuestas.addItem(" ");
     llenarlista(dencuestas,lencuestas);//metemos el arreglo a la lista
+    }
     
 }
 public void llenarlindicadores(){//método que llena la lista de indicadores
