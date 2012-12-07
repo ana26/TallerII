@@ -2,6 +2,8 @@ package comovamos;
 
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Event;
+import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.sql.ResultSet;
@@ -11,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -263,15 +266,15 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
             Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     llenarlregion();
-    llenarlencuestas(i);
+    
     //llenarlentidades();        llenarlindicadores();
-    lentidades.disable();lindicadores.disable();
+    lentidades.disable();lencuestas.disable();lindicadores.disable();
 }//GEN-LAST:event_formWindowOpened
 
 private void lregionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lregionActionPerformed
 // TODO add your handling code here:
       
-      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lentidades.disable();lindicadores.disable();}
+      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lencuestas.disable();lentidades.disable();lindicadores.disable();}
       if(lregion.getSelectedIndex()>0){lentidades.enable();llenarlentidades();}
 }//GEN-LAST:event_lregionActionPerformed
 
@@ -330,6 +333,8 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 );
         System.out.println(chart);
         ChartPanel chartPanel = new ChartPanel(chart, false);
+        //chartPanel.addChartMouseListener(void chartMouseMoved(ChartMouseEvent event));
+        
         
         JFgrafica.setContentPane(chartPanel);
         JFgrafica.setVisible(true);        
@@ -343,9 +348,6 @@ private void ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 // TODO add your handling code here:
     guardar.setVisible(true);
     guardar.setEnabled(true);
-    
-    
-    
 }//GEN-LAST:event_ExportarActionPerformed
 public void limpiar(){
     lregion.removeAllItems();
