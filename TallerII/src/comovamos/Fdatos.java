@@ -4,6 +4,7 @@ package comovamos;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Event;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.sql.ResultSet;
@@ -266,15 +267,15 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
             Logger.getLogger(VDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     llenarlregion();
-    
+    llenarlencuestas(i);
     //llenarlentidades();        llenarlindicadores();
-    lentidades.disable();lencuestas.disable();lindicadores.disable();
+    lentidades.disable();;lindicadores.disable();
 }//GEN-LAST:event_formWindowOpened
 
 private void lregionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lregionActionPerformed
 // TODO add your handling code here:
       
-      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lencuestas.disable();lentidades.disable();lindicadores.disable();}
+      if(lregion.getSelectedIndex()<1){lentidades.setSelectedIndex(-1);lencuestas.setSelectedIndex(-1);lindicadores.setSelectedIndex(-1);lentidades.disable();lindicadores.disable();}
       if(lregion.getSelectedIndex()>0){lentidades.enable();llenarlentidades();}
 }//GEN-LAST:event_lregionActionPerformed
 
@@ -333,10 +334,13 @@ private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 );
         System.out.println(chart);
         ChartPanel chartPanel = new ChartPanel(chart, false);
+        Rectangle2D dataArea = chartPanel.getChartRenderingInfo().getPlotInfo().getDataArea();
+        dataArea.setFrame(dataArea);
         //chartPanel.addChartMouseListener(void chartMouseMoved(ChartMouseEvent event));
         
         
         JFgrafica.setContentPane(chartPanel);
+        
         JFgrafica.setVisible(true);        
         Exportar.setEnabled(true);
         
